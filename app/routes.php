@@ -15,7 +15,7 @@
 Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));
 Route::get("u/{user}",array("as"=>"userpage","uses"=>"UserController@show"));
 Route::get("login",array("before"=>"guest","as"=>"login","uses"=>"UserController@login"));
-Route::get("logout",array("before"=>"auth","as"=>"login","uses"=>"UserController@logout"));
+Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"UserController@logout"));
 //Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));
 //Route::resource("user","UserController");
 
