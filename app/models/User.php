@@ -32,7 +32,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
            if(Auth::guest())
                return false;
            if(Auth::user()->username!=$username);
-              return true;
+              return false;
               
               return true;
            
