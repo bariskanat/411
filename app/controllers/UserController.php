@@ -120,8 +120,8 @@ class UserController extends BaseController {
                    "password"  =>Input::get("password")
                ];
                
-               
-               return (!Auth::attempt($user))
+               Auth::attempt($user,true);
+               return (!Auth::check())
                             ?Redirect::back()->with("message","the password/username fields not match")
                             :Redirect::route("userpage",array(Auth::user()->username));;
                
