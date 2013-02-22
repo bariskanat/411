@@ -1,18 +1,25 @@
-<?php 
+<?php
 
 class Page extends Base{
-	
-	
-    protected $table = 'pages';
-    static $rules=[];
-
-
+    
+    protected $table = 'users';
+    
+    public static $rules=[];
+    
+    
     public function user()
     {
-            return $this->belongs_to("user");
+        return $this->belongsTo("User");
     }
-	
+    
+    
+    public function comments()
+    {
+        return $this->hasMany("Comment");
+    }
+    
+    
+    
+    
 }
-
-
 ?>
