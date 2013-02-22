@@ -37,12 +37,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
               return true;
            
        }
-       public static function val($input=null)
+       public static function val($input=null,$rules=null)
        {
-        
+           if(is_null($rules))
+               $rules=self::$rules;
            if(is_null($input))
                $input=Input::all();
-           return Validator::make($input,self::$rules);
+           return Validator::make($input,$rules);
        }
     
 	

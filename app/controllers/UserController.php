@@ -8,6 +8,8 @@ class UserController extends BaseController {
        {
          $this->beforeFilter('guest', array('only' =>
                            array('create')));
+         $this->beforeFilter('csrf', array('only' =>
+                           array('postLogin')));
          
        }
        
@@ -106,7 +108,27 @@ class UserController extends BaseController {
         
         public function postLogin()
         {
-            return "login area";
+           $rules=[               
+                    "email"       => "required|email",
+                    "password"    => "required" 
+               ];
+           $v=User::val(Input::all(), $rules);
+           
+           if($v->passes()){
+               $user=[
+                   "email"  =>Input::get("email"),
+                   "password"  =>Input::get("password")
+               ];
+               
+               
+               return (!Auth::attempt($user))
+                            ?Redirect::back()->with("message","the password/username fields not match")
+                            :Redirect::route("userpage",array(Auth::user()->username));;
+               
+           }else{
+               return Redirect::back()->with("message","the password/username fields not match");
+           }
+               
         }
         
         public function logout()
