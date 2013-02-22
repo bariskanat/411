@@ -9,6 +9,7 @@ class CreateUsersTable extends Migration {
 	 *
 	 * @return void
 	 */
+	
 	public function up()
 	{
 		Schema::create("users",function($table){
