@@ -1,0 +1,19 @@
+/* 
+    Document   : main
+    Created on : 19-Feb-2013, 10:18:01 PM
+    Author     : baris
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+
+body{
+    width: 90%;
+    margin:20px auto;
+ 
+}
+
