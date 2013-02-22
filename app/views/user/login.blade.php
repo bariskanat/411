@@ -1,8 +1,8 @@
 @extends("master")
 
 @section("content")
-
-<div class="login">
+<div clas="form">
+<div class="registerarea">
     
 @if(Session::has("message"))
     <p class="error message">{{Session::get("message")}}</p>
@@ -38,7 +38,7 @@
     {{{HTML::route("signup","signup")}}}
     
 </div>
-
+</div>
 
 
 

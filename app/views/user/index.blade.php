@@ -4,7 +4,7 @@
 @section("content")
 
 
-
+<div class="form">
 <div class="registerarea">
 <h1>hello</h1>
 
@@ -60,10 +60,10 @@
 </div>
 
 
-<div class="signup">
-    <p>Already Have an Account?</p>
-    {{{HTML::route("login","login")}}}
-    
-</div>
+    <div class="signup">
+        <p>Already Have an Account?</p>
+        {{{HTML::route("login","login")}}}
 
+    </div><!-----------signup--------------------->
+</div>
 @stop

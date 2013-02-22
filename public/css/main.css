@@ -1,13 +1,50 @@
-/* 
-    Document   : main
-    Created on : 19-Feb-2013, 10:18:01 PM
-    Author     : baris
-    Description:
-        Purpose of the stylesheet follows.
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
 */
 
-root { 
-    display: block;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 
@@ -19,7 +56,7 @@ body{
  
 }
 
-
+  /*----------- main container --------------------*/ 
 div.container{
      border:1px solid #ccc;
      -moz-border-radius: 5px;
@@ -31,5 +68,87 @@ div.container{
     box-shadow:  0 1px 2px 1px rgba(0, 0, 0, 0.25);
     background-color: white;
     min-height: 650px;
+}
+
+
+
+
+/*-------- form area for login and register ----------*/
+
+div.form{
+    overflow: hidden;
+    
+}
+
+div.registerarea,div.signup{
+    float:left;
+    
+}
+
+div.registerarea{
+    margin-right: 15px;
+    width: 60%;
+}
+
+div.registerarea p{
+    margin-bottom: 10px;
+}
+div.registerarea label{
+    display: inline-block;
+    width: 180px;
+    margin-right: 10px;
+    text-transform: capitalize;
+}
+
+div.registerarea input[type=text],div.registerarea input[type=password]{
+    width: 200px;
+    height: 15px;
+    padding:3px;
+    color: #ccc;
+    
+    
+}
+
+ div.registerarea input[type=submit] {
+-moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    -moz-user-select: none;
+    background-color: #EAEAEA;
+    background-image: linear-gradient(#FAFAFA, #EAEAEA);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #DDDDDD #C5C5C5;
+    border-image: none;
+    border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    -moz-box-shadow: 1px 3px rgba(0, 0, 0, 0.075);
+    -webkit-box-shadow: 1px 3px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.075);
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 7px 15px;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+div.registerarea input[type=submit]:hover{
+color:#fff;
+text-decoration:none;
+text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+background-color:#3072b3;
+background-image:-moz-linear-gradient(#599bcd, #3072b3);
+background-image:-webkit-linear-gradient(#599bcd, #3072b3);
+background-image:linear-gradient(#599bcd, #3072b3);
+background-repeat:repeat-x;
+border-color:#2a65a0
 }
 
