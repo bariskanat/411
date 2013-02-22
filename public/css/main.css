@@ -14,7 +14,22 @@ root {
 body{
     width: 90%;
     margin:20px auto;
-    color:blue;
+    background-color: rgb(249, 250, 247);
+    
  
+}
+
+
+div.container{
+     border:1px solid #ccc;
+     -moz-border-radius: 5px;
+     -webkit-border-radius: 5px;     
+     border-radius: 2px;
+     padding: 10px;
+    -moz-shadow:  0 1px 2px 1px rgba(0, 0, 0, 0.25);
+    -wbkik-shadow:  0 1px 2px 1px rgba(0, 0, 0, 0.25);
+    box-shadow:  0 1px 2px 1px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    min-height: 650px;
 }
 
