@@ -105,6 +105,7 @@ div.registerarea input[type=text],div.registerarea input[type=password]{
     height: 15px;
     padding:3px;
     color: #ccc;
+  
     
     
 }
@@ -150,5 +151,15 @@ background-image:-webkit-linear-gradient(#599bcd, #3072b3);
 background-image:linear-gradient(#599bcd, #3072b3);
 background-repeat:repeat-x;
 border-color:#2a65a0
+}
+
+div.signup a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+div.signup a:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }
 

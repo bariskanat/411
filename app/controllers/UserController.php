@@ -6,8 +6,8 @@ class UserController extends BaseController {
     
        public function __construct()
        {
-         //$this->beforeFilter('guest', array('only' =>
-                           // array('create')));
+         $this->beforeFilter('guest', array('only' =>
+                           array('create')));
          
        }
        
@@ -33,7 +33,7 @@ class UserController extends BaseController {
 	 */
 	public function create()
 	{
-               Auth::logout();
+           
 	       return View::make("user.index");
 	}
 
