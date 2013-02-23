@@ -29,6 +29,7 @@ Route::post("login",array("before"=>"guest","uses"=>"UserController@postLogin"))
 
 
 Route::get('/', function()
-{
-	return View::make('hello');
+{       $b=app::make("Kanat");
+        var_dump($b);
+	//return View::make('hello');
 });
