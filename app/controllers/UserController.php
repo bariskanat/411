@@ -5,30 +5,11 @@ class UserController extends BaseController {
     
     
        public function __construct()
-       {
-         
-         $this->beforeFilter('guest', array('only' =>
-                           array('create')));
-         $this->beforeFilter('csrf', array('only' =>
-                           array('postLogin')));
-         
+       {         
+         $this->beforeFilter('guest', ['only' =>['create']]);
+         $this->beforeFilter('csrf', ['only' => ['postLogin']]);         
        }
        
-       
-     
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-            $this->image->hello();
-          
-            //return all users      
-           
-                
-	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -76,20 +57,7 @@ class UserController extends BaseController {
            
 	}
 
-	
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @return Response
-	 */
-	public function edit($id=null)
-	{
-           
-		
-	}
-        
-        
         public function login()
         {
             return View::make("user.login");
@@ -100,21 +68,23 @@ class UserController extends BaseController {
            $rules=[               
                     "email"       => "required|email",
                     "password"    => "required" 
-               ];
+                  ];
            $v=User::val(Input::all(), $rules);
            
-           if($v->passes()){
+           if($v->passes())
+           {
                $user=[
-                   "email"  =>Input::get("email"),
-                   "password"  =>Input::get("password")
-               ];
+                       "email"     =>Input::get("email"),
+                       "password"  =>Input::get("password")
+                     ];
                
                Auth::attempt($user,true);
                return (!Auth::check())
                             ?Redirect::back()->with("message","the password/username fields not match")
                             :Redirect::route("userpage",array(Auth::user()->username));;
                
-           }else{
+           }else
+           {
                return Redirect::back()->with("message","the password/username fields not match");
            }
                
@@ -125,24 +95,6 @@ class UserController extends BaseController {
             Auth::logout();return Redirect::to("/");
         }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//User::find($id)->delete();
-	}
+	
 
 }
