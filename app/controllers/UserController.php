@@ -6,6 +6,7 @@ class UserController extends BaseController {
     
        public function __construct()
        {
+         
          $this->beforeFilter('guest', array('only' =>
                            array('create')));
          $this->beforeFilter('csrf', array('only' =>
@@ -22,6 +23,7 @@ class UserController extends BaseController {
 	 */
 	public function index()
 	{
+            $this->image->hello();
           
             //return all users      
            
@@ -74,20 +76,7 @@ class UserController extends BaseController {
            
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @return Response
-	 */
-	public function show($username)
-	{
-	    $user=User::where("username",$username)->first();
-            
-            $permission=User::permission($username);
-             
-            return ($user)? View::make("user.userpage",array("user"=>$user,"perm"=>$permission)):Redirect::route("home");
-              
-	}
+	
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -153,7 +142,7 @@ class UserController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		//User::find($id)->delete();
 	}
 
 }
