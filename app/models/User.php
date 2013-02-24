@@ -28,21 +28,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
        );
        
        public static function permission($username)
+       {     
+           if(!self::check_cred($username)) return false;            
+                                     
+           return true;           
+       }
+       
+       private  static function check_cred($username)
        {
-           if(Auth::guest())
-               return false;
-           if(Auth::user()->username!=$username);
-              return false;
-              
-              return true;
+           if(Auth::guest()) return false;
+               
+           $user=User::where("username",$username)->first();
            
+           $auth=Auth::user();
+           
+           if($auth->email!=$user->email || $auth->username!=$username) return false;         
+          
+           return true;
        }
        public static function val($input=null,$rules=null)
        {
-           if(is_null($rules))
-               $rules=self::$rules;
-           if(is_null($input))
-               $input=Input::all();
+           if(is_null($rules)) $rules=self::$rules;
+               
+           if(is_null($input)) $input=Input::all();
+               
            return Validator::make($input,$rules);
        }
     
