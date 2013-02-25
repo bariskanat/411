@@ -5,7 +5,7 @@
         
         defaults:{
             Effect:"fadeIn",
-            Speed:500,      
+            Speed:300,      
             Url: "searchlogin",            
             zindex:2,
             Htmlnode:$("#username")
@@ -63,12 +63,13 @@
              
          template:function(info){
           
+          var temp=App.login.defaults;
           if($("span.info").length)
           {
               $("span.info").remove();
           }
       
-          $("<span ></span>",{text:info.data,class:"info"}).appendTo(App.login.defaults.Htmlnode.parent());
+          $("<span ></span>",{text:info.data,class:"info"}).appendTo(temp.Htmlnode.parent()).hide()[temp.Effect](temp.Speed);
           
          }
              
