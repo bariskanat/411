@@ -13,7 +13,7 @@
 //Route::controller('user', 'UserController');
 
 Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));
-Route::get("u/{user}",array("as"=>"userpage","uses"=>"UserController@show"));
+Route::get("u/{user}",array("as"=>"userpage","uses"=>"ProfileController@getUser"));
 Route::get("login",array("before"=>"guest","as"=>"login","uses"=>"UserController@login"));
 Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"UserController@logout"));
 //Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));
@@ -25,11 +25,8 @@ Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"UserControlle
 
 Route::post("register",array("before"=>"csrf","uses" => "UserController@store"));
 Route::post("login",array("before"=>"guest","uses"=>"UserController@postLogin"));
+Route::post("searchlogin","UserController@search");
 
 
 
-Route::get('/', function()
-{       $b=app::make("Kanat");
-        var_dump($b);
-	//return View::make('hello');
-});
+Route::get('/',"UserController@index");

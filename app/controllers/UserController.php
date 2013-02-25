@@ -56,6 +56,23 @@ class UserController extends BaseController {
             
            
 	}
+        
+        
+        public function search()
+        {
+            if(!Request::ajax())return Redirect::to("/");               
+            
+            $input   = Input::json();
+           
+             if(!empty($input->data))
+             {
+                 
+                 $result=User::where("username","{$input->data}")->first();
+                 
+                 return ($result)?json_encode(["data"=>"unavailable"]):json_encode(["data"=>"available"]);
+             }
+            
+        }
 
 
         public function login()

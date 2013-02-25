@@ -13,8 +13,6 @@
  
     
 
-    {{{HTML::style("css/main.css")}}}
-    {{{HTML::script("js/main.js")}}}
    
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -35,6 +33,9 @@
     </div> <!-- /container -->
 
 
+    {{{HTML::style("css/main.css")}}}
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    {{{HTML::script("js/main.js")}}}
   </body>
 </html>
 

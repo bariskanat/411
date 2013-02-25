@@ -5,6 +5,7 @@
      
      public function getUser($username)
      {
+         
          $user=User::where("username",$username)->first();
             
          $permission=User::permission($username);
