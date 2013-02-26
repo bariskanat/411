@@ -35,13 +35,13 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::route('login');
+	if (!App::make("UserSession")->user()) return Redirect::route('login');
 });
 
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (App::make("UserSession")->user()) return Redirect::to('/');
 });
 
 /*

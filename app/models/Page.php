@@ -2,7 +2,7 @@
 
 class Page extends Base{
     
-    protected $table = 'users';
+    protected $table = 'pages';
     
     public static $rules=[];
     

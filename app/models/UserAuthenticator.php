@@ -6,19 +6,24 @@ class UserAuthenticator{
     
     public function __construct($user=null)
     {
+        
         $this->user=($user)?$user:new User;
     }
     
     public function authenticate($email,$password)
     {
-        $user=false;
-        $hash=($this->user->password)?$this->user->password:null;
+        $user        = false;
+        $hash        = ($this->user->password)?$this->user->password:null;
+        $useremail   = ($this->user->email)?$this->user->email:null;
+       
         
-        if($hash && Hash::check($password,$hash) && $email==$this->user->email){
+        if($hash && Hash::check($password,$hash) && $useremail && $email==$useremail){
             $user=$this->user;
-        }
+         
+        }        
+       
         
-        return false;
+        return $user;
     }
 }
 ?>

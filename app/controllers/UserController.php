@@ -3,13 +3,25 @@
 class UserController extends BaseController {
 
     
-    
-       public function __construct()
-       {         
+       protected $user;
+       
+       public function __construct(User $user)
+       {        
+         $this->user=$user;
          $this->beforeFilter('guest', ['only' =>['create']]);
          $this->beforeFilter('csrf', ['only' => ['postLogin']]);         
        }
        
+       
+         public function getUser($username)
+         {
+
+             $user=$this->user->where("username",$username)->first();         
+
+             $permission=$this->user->permission($username);             
+
+             return ($user)? View::make("user.userpage",array("user"=>$user,"perm"=>$permission)):Redirect::route("home");
+         }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -29,12 +41,12 @@ class UserController extends BaseController {
 	 */
 	public function store()
 	{
-            if(Auth::check())  return Redirect::to("/");
+            if(App::make("UserSession")->user())  return Redirect::to("/");
             $v=User::val();
             if($v->passes())
             {
                 
-                $result=User::create(array(
+                $result=$this->user->create(array(
                     "username"  =>Input::get("username"),
                     "email"     =>Input::get("email"),
                     "password"  =>Hash::make(Input::get("password"))
@@ -44,7 +56,7 @@ class UserController extends BaseController {
               
                 if($result)
                 {                    
-                    Auth::login($result,true);
+                    App::make("UserSession")->start_session($result);
              
                     return Redirect::route("userpage",array($result->username)); 
                 }
@@ -67,7 +79,7 @@ class UserController extends BaseController {
              if(!empty($input->data))
              {
                  
-                 $result=User::where("username","{$input->data}")->first();
+                 $result=$this->user->where("username","{$input->data}")->first();
                  
                  return ($result)?json_encode(["data"=>"unavailable"]):json_encode(["data"=>"available"]);
              }
@@ -75,42 +87,6 @@ class UserController extends BaseController {
         }
 
 
-        public function login()
-        {
-            return View::make("user.login");
-        }
-        
-        public function postLogin()
-        {
-           $rules=[               
-                    "email"       => "required|email",
-                    "password"    => "required" 
-                  ];
-           $v=User::val(Input::all(), $rules);
-           
-           if($v->passes())
-           {
-               $user=[
-                       "email"     =>Input::get("email"),
-                       "password"  =>Input::get("password")
-                     ];
-               
-               Auth::attempt($user,true);
-               return (!Auth::check())
-                            ?Redirect::back()->with("message","the password/username fields not match")
-                            :Redirect::route("userpage",array(Auth::user()->username));;
-               
-           }else
-           {
-               return Redirect::back()->with("message","the password/username fields not match");
-           }
-               
-        }
-        
-        public function logout()
-        {
-            Auth::logout();return Redirect::to("/");
-        }
 
 	
 

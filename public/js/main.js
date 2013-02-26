@@ -76,10 +76,8 @@
     
     };
     
-    
-    
-    
-    
+   
+  
     
     
 })();
@@ -87,4 +85,7 @@
 App.login.init();
 
 
+
 //console.log(login);
+
+

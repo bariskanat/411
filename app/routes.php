@@ -10,23 +10,26 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-//Route::controller('user', 'UserController');
+
+App::instance("c",new C);
+
+
+
+
 
 Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));
-Route::get("u/{user}",array("as"=>"userpage","uses"=>"ProfileController@getUser"));
-Route::get("login",array("before"=>"guest","as"=>"login","uses"=>"UserController@login"));
-Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"UserController@logout"));
-//Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));
-//Route::resource("user","UserController");
+Route::get("u/{user}",array("as"=>"userpage","uses"=>"UserController@getUser"));
+Route::get("login",array("before"=>"guest","as"=>"login","uses"=>"SessionController@getlogin"));
+Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"SessionController@logout"));
+Route::get('/',function(){
+    return "hello world";
+});
 
-//Route::get("user","UserController@index");
+
 
 
 
 Route::post("register",array("before"=>"csrf","uses" => "UserController@store"));
-Route::post("login",array("before"=>"guest","uses"=>"UserController@postLogin"));
+Route::post("login",array("before"=>"guest","uses"=>"SessionController@postLogin"));
 Route::post("searchlogin","UserController@search");
 
-
-
-Route::get('/',"UserController@index");

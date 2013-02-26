@@ -36,11 +36,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
        
        private  static function check_cred($username)
        {
-           if(Auth::guest()) return false;
-               
-           $user=User::where("username",$username)->first();
+           $auth=App::make("UserSession")->user();
            
-           $auth=Auth::user();
+           if(!$auth) return false;
+           
+           $user=User::where("username",$username)->first();          
            
            if($auth->email!=$user->email || $auth->username!=$username) return false;         
           
