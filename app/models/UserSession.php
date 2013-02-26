@@ -4,8 +4,8 @@
 class UserSession{
     
     protected $user;
-    protected $current_user;
-    protected $session_name="ui";
+    protected static $current_user;
+    protected $session_name="userinfo";
     
     public function __construct(User $user)
     {
@@ -14,12 +14,16 @@ class UserSession{
     
     public function start_session($user,$time=null)
     {
-        $this->current_user=$user;
+        self::$current_user=$user;
         App::make("c")->settime($time)->set($this->session_name,[
-                    "email"=>$this->current_user->email,
-                    "username" =>$this->current_user->username,
-                    "id"  =>$this->current_user->id
+                    "email"=>self::$current_user->email,
+                    "username" =>self::$current_user->username,
+                    "id"  =>self::$current_user->id
                  ]);
+        
+      
+        
+        
     }
     
     public function destroy()
@@ -30,12 +34,14 @@ class UserSession{
     
     public function user()
     {
-        if(!$this->current_user)
-        {
-            $this->current_user=$this->user->find(App::make("c")->get($this->session_name)['id']);
-        }
         
-        return ($this->current_user)?$this->current_user:false;
+        if(!self::$current_user)
+        {
+            self::$current_user=$this->user->find(App::make("c")->get($this->session_name)['id']);
+        }        
+    
+        
+        return (self::$current_user)?self::$current_user:false;
                 
         
     }

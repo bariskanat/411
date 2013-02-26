@@ -18,9 +18,13 @@ class UserController extends BaseController {
 
              $user=$this->user->where("username",$username)->first();         
 
-             $permission=$this->user->permission($username);             
+             $permission=$this->user->permission($username);              
 
              return ($user)? View::make("user.userpage",array("user"=>$user,"perm"=>$permission)):Redirect::route("home");
+         }
+         
+         public function edit(){
+             echo "hello";
          }
 
 	/**

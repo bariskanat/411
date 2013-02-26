@@ -18,14 +18,16 @@ class SessionController extends BaseController{
         $auth=new UserAuthenticator($user);
         if($auth->authenticate($email,$password))
          {     
+            
             App::make("UserSession")->start_session($user);
-          
+            
             return (!App::make("UserSession")->user())
-                    ?Redirect::back()->with("message","the password/username fields not match")
+                    ?Redirect::route("login")->with("message","the password/username fields not match")
                     :Redirect::route("userpage",array($user->username));;
             
         }else
-        {            
+        {        
+            echo 4444;die;
             return Redirect::back()->with("message","the password/username fields not match");
         }
     }

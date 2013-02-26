@@ -105,6 +105,9 @@ class C{
         $info=["key"=>$value,"secret"=> $this->secret()];
         $value=$this->encode($info);         
         setcookie($name, $value,time()+ self::$expire, self::$path, self::$domain, self::$secure, self::$httponly);
+        echo "<pre>";
+        print_r($_COOKIE);
+        echo "<hr/>";
         
     }    
    

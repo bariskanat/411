@@ -3,12 +3,20 @@
 
 @section("content")
 
-<?php 
-echo "<pre>";
-var_dump($user->username);
-var_dump($perm);
+<?php
 
+  var_dump($perm);
 ?>
+<div class="userinfo">
+    <h1>{{$user->username}}</h1>  
+   @if($perm)
+   
+   {{{HTML::route('useredit', 'edit your profile', array('id' => $user->id))}}}
+   {{{HTML::route('createpage', 'create a page ', array('id' => $user->id))}}}
+   @endif
+</div>
+
+
 
 
 
