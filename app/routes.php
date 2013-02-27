@@ -25,7 +25,7 @@ Route::get('/',function(){
 
 Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));
 Route::get("u/{user}",array("as"=>"userpage","uses"=>"UserController@getUser"));
-Route::get("edit/{id}",array("as"=>"useredit","uses"=>"UserController@edit"));
+Route::get("edit/{id}",array("before"=>"auth","as"=>"useredit","uses"=>"UserController@edit"));
 Route::get("login",array("before"=>"guest","as"=>"login","uses"=>"SessionController@getlogin"));
 Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"SessionController@logout"));
 Route::get("create/{id}",array("as"=>"createpage","uses" => "PageController@getCreate"));

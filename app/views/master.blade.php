@@ -24,7 +24,11 @@
 
   <body>
 
-  
+      <div id="header">
+          
+          @yield("header")
+          
+      </div><!------- header -------------->
 
     <div class="container">
 

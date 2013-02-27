@@ -49,15 +49,31 @@ table {
 
 
 body{
-    width: 90%;
-    margin:20px auto;
-    background-color: rgb(249, 250, 247);
     
- 
+    
+ background-color: rgb(249, 250, 247);
+}
+
+
+div#header{
+    max-width: 100%;
+   
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    
+    
+}
+
+div#header img{
+   width: 1400px;
+   height:320px;
 }
 
   /*----------- main container --------------------*/ 
 div.container{
+     width: 90%;
+    margin:20px auto;
+    
      border:1px solid #ccc;
      -moz-border-radius: 5px;
      -webkit-border-radius: 5px;     

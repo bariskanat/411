@@ -23,8 +23,11 @@ class UserController extends BaseController {
              return ($user)? View::make("user.userpage",array("user"=>$user,"perm"=>$permission)):Redirect::route("home");
          }
          
-         public function edit(){
-             echo "hello";
+         public function edit($id)
+         {
+             $user=$this->user->find($id);
+             
+             return ($user)? View::make("useredit",["user"=>$user]):Redirect::route("home");
          }
 
 	/**

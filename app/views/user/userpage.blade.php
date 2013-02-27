@@ -1,5 +1,9 @@
 @extends("master")
 
+@section("header")
+
+ {{{HTML::image("images/header.png")}}}
+@stop
 
 @section("content")
 
