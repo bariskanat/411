@@ -126,6 +126,15 @@ div.registerarea input[type=text],div.registerarea input[type=password]{
     
 }
 
+div.registerarea form#usereditform input[type=text],div.registerarea input[type=password],form#usereditform textArea{
+    width: 300px;
+    padding:3px;
+}
+
+form#usereditform textArea{
+    height: 250px;
+}
+
  div.registerarea input[type=submit] {
 -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
