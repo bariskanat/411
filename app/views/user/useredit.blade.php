@@ -15,16 +15,16 @@
   <script type="text/template" id="useredittemplate">
       <form id="usereditform">
         <p>
-            
+            <label for="firstname">firsttname</label>
             <input type="text" value="<%= firstname %>" id="firstname">
         </p>
         <p>
-            <label for="lastname">firstname</label>
+            <label for="lastname">lasttname</label>
             <input type="text" value="<%= lastname %>" id="lastname">
         </p>
         <p>
-            <label for="about">firstname</label>
-            <textarea  id="about"><%= about %></textarea>
+            <label for="about">about</label>
+            <textarea  id="about" name="about"><%= about %></textarea>
            
         </p>
         <input type="submit" value="update your info" id="editsubmit">
