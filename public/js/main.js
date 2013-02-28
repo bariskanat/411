@@ -89,30 +89,12 @@
 
 App.login.init();
 
-App.Models.User=Backbone.Model.extend({
-    defaults:{
-        
-    },
-            
-    validate:function(args){
-        
-        if(args.username===""){
-            return "you must have username";
-        }
-    }
-    
-});
 
-App.Views.User=Backbone.View.extend({
-    
-    initialize:function(){
-        this.model.on('sync',this.render,this);
-    },
-    render:function(){
 
-    }
-});
 
+
+
+ 
 //console.log(login);
 
 

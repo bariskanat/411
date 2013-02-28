@@ -12,7 +12,40 @@ class UserController extends BaseController {
          $this->beforeFilter('csrf', ['only' => ['postLogin']]);         
        }
        
+       public function bbedit($id)
+       {
+           
+           $user=$this->user->find($id);
+           
+           if(!$user) return Redirect::to("/");
+           
+           return json_encode([
+               "firstname" =>$user->firstname,
+               "lastname"  =>$user->lastname,
+               "about"     =>$user->about,
+               "id"        =>$user->id
+           ]);
+       }
        
+       
+       public function bbupdate($id)
+       {
+           $user=$this->user->find($id);
+           $input=Input::json();
+           
+           if($user)
+           {
+               $user->firstname=$input->firstname;
+               $user->lastname=$input->lastname;
+               $user->about=$input->about;
+               
+               $user->save();
+           }
+           
+           return $user;
+          
+           
+       }
          public function getUser($username)
          {
 
@@ -27,7 +60,7 @@ class UserController extends BaseController {
          {
              $user=$this->user->find($id);
              
-             return ($user)? View::make("useredit",["user"=>$user]):Redirect::route("home");
+             return ($user)? View::make("user.useredit",["user"=>$user]):Redirect::route("home");
          }
 
 	/**

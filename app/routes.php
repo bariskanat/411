@@ -29,6 +29,10 @@ Route::get("edit/{id}",array("before"=>"auth","as"=>"useredit","uses"=>"UserCont
 Route::get("login",array("before"=>"guest","as"=>"login","uses"=>"SessionController@getlogin"));
 Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"SessionController@logout"));
 Route::get("create/{id}",array("as"=>"createpage","uses" => "PageController@getCreate"));
+Route::get("user/{id}",array("before"=>"auth","uses"=>"UserController@bbedit"));
+
+
+Route::put("user/{id}",array("before"=>"auth","uses"=>"UserController@bbupdate"));
 
 
 

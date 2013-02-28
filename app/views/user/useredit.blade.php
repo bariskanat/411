@@ -1,5 +1,3 @@
-
-
 @extends("master")
 
 @section("header")
@@ -12,61 +10,28 @@
 @section("content")
 
  
-  <div class="registerarea">
-<h1>hello</h1>
+  <div class="registerarea" id="useredit">
 
-{{{Form::open()}}}
-
-    <p>
-    {{{Form::label("username","username")}}}
-    {{{Form::text("username",Input::old("username"))}}}
-    
-    @if($errors->has("username"))
-        {{{$errors->first("username","<span class='errors'>:message</span>")}}}
-    @endif
-    
-</p>
-
-<p>
-    {{{Form::label("email","email address")}}}
-    {{{Form::text("email",Input::old("email"))}}}
-    
-    @if($errors->has("email"))
-        {{{$errors->first("email","<span class='errors'>:message</span>")}}}
-    @endif
-    
-</p>
-
-<p>
-    {{{Form::label("password","password")}}}
-    {{{Form::password("password")}}}
-    
-    
-    @if($errors->has("password"))
-        {{{$errors->first("password","<span class='errors'>:message</span>")}}}
-    @endif
-    
-</p>
+  <script type="text/template" id="useredittemplate">
+      <form id="usereditform">
+        <p>
+            
+            <input type="text" value="<%= firstname %>" id="firstname">
+        </p>
+        <p>
+            <label for="lastname">firstname</label>
+            <input type="text" value="<%= lastname %>" id="lastname">
+        </p>
+        <p>
+            <label for="about">firstname</label>
+            <textarea  id="about"><%= about %></textarea>
+           
+        </p>
+        <input type="submit" value="update your info" id="editsubmit">
+        </form>
+  
 
 
-<p>
-    
-    
-    {{{Form::label("password_confirmation","password confirm")}}}
-    {{{Form::password("password_confirmation")}}}
-    
-    @if($errors->has("password_confirmation"))
-        {{{$errors->first("password_confirmation","<span class='errors'>:message</span>")}}}
-    @endif
-    
-</p>
-    
-<input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    {{{Form::submit("update your info")}}}
-    {{{Form::close()}}}
-</div>
-
-
-</div>
-
+</script>
+  </div>
 @stop

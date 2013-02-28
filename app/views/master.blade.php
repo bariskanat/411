@@ -38,8 +38,15 @@
 
 
     {{{HTML::style("css/main.css")}}}
-     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    {{{HTML::script("js/jquery.js")}}}
+    {{{HTML::script("js/underscore.js")}}}
+    {{{HTML::script("js/backbone.js")}}}
     {{{HTML::script("js/main.js")}}}
+    {{{HTML::script("js/models.js")}}}
+    {{{HTML::script("js/collections.js")}}}
+    {{{HTML::script("js/views.js")}}}
+    {{{HTML::script("js/bb.js")}}}
+    
   </body>
 </html>
 
