@@ -15,15 +15,15 @@
   <script type="text/template" id="useredittemplate">
       <form id="usereditform">
         <p>
-            <label for="firstname">firsttname</label>
+            <label for="firstname">firsttname</label><br/>
             <input type="text" value="<%= firstname %>" id="firstname">
         </p>
         <p>
-            <label for="lastname">lasttname</label>
+            <label for="lastname">lasttname</label><br/>
             <input type="text" value="<%= lastname %>" id="lastname">
         </p>
         <p>
-            <label for="about">about</label>
+            <label for="about">about</label><br/>
             <textarea  id="about" name="about"><%= about %></textarea>
            
         </p>
