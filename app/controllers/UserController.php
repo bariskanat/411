@@ -9,7 +9,7 @@ class UserController extends BaseController {
        {        
          $this->user=$user;
          $this->beforeFilter('guest', ['only' =>['create']]);
-         $this->beforeFilter('csrf', ['only' => ['postLogin']]);         
+         $this->beforeFilter('csrf', ['only' => ['postLogin',"updatephoto"]]);         
        }
        
        public function bbedit($id)
@@ -44,6 +44,32 @@ class UserController extends BaseController {
            
            return $user;
           
+           
+       }
+       
+       
+       public function userphoto($id)
+       {
+           $user=$this->user->find($id);
+           
+           return ($user) ? View::make("user.userphoto",["user"=>$user]):Redirect::to("/");
+       }
+       
+       
+       public function updatephoto($id)
+       {
+           $user=$this->user->find($id);      
+          
+           if($user && (Input::hasFile("picture")))
+           {
+               $result=Image::open($_FILES['picture']); 
+               if($result){
+                   
+               }
+           }
+           
+           return Redirect::back();
+           
            
        }
          public function getUser($username)

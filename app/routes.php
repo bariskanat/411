@@ -16,9 +16,7 @@ App::instance("c",new C);
 App::singleton("UserSession",function(){
     return new UserSession(new User);
 });
-Route::get("veli",function(){
-    
-});
+
 Route::get('/',function(){
     return "hello world";
 });
@@ -30,6 +28,7 @@ Route::get("login",array("before"=>"guest","as"=>"login","uses"=>"SessionControl
 Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"SessionController@logout"));
 Route::get("create/{id}",array("as"=>"createpage","uses" => "PageController@getCreate"));
 Route::get("user/{id}",array("before"=>"auth","uses"=>"UserController@bbedit"));
+Route::get("photo/{id}",array("before"=>"auth","as"=>"userphoto","uses"=>"UserController@userphoto"));
 
 
 Route::put("user/{id}",array("before"=>"auth","uses"=>"UserController@bbupdate"));
@@ -41,7 +40,7 @@ Route::put("user/{id}",array("before"=>"auth","uses"=>"UserController@bbupdate")
 
 
 Route::post("register",array("before"=>"csrf","uses" => "UserController@store"));
-
+Route::post("photo/{id}",array("before"=>"auth","as"=>"editphoto","uses"=>"UserController@updatephoto"));
 Route::post("login",array("before"=>"guest","uses"=>"SessionController@postLogin"));
 Route::post("searchlogin","UserController@search");
 
