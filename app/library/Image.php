@@ -2,6 +2,8 @@
 
 class Image{
     
+    use message;
+    
     private $resource;
     private $image;
     private $thumbX=200;
@@ -10,22 +12,41 @@ class Image{
     private $thumbExt;
     private $size=4194304;
     private $imageX;
+    private $filter=[];
     private $imageY;
     private $imageName;
     private $imageExt;
     private $imagesize;
     private $allowed=["jpeg","jpg","gif","png"];
     private $path;
-    private $attributes=["thumbX","thumbY","thumbExt","thumbName","size","path"];
+    private $attributes=["thumbX","thumbY","thumbExt","thumbName","size","path","filter"];
     
     public function __construct($image,$info=null)
     {
         $this->imagepath();       
         $this->resource=(is_array($image))?$image['tmp_name']:$image;
         $this->getimageinfo($image);
-        $this->createimage();
-        if(!is_null($info))
-        $this->setattributes($info);
+        
+        if($this->checkerror())
+        {
+           
+            $this->createimage();
+            if(!is_null($info))
+            $this->setattributes($info);
+        }
+        
+    }
+    
+    
+    public function passes()
+    {
+        return !$this->checkerror();
+    }
+    
+    
+    public function checkerror()
+    {
+        return ($this->allMessage())?true:false;
     }
     
     public function imagepath()
@@ -36,10 +57,12 @@ class Image{
     
     public function getimageinfo($image)
     {
-        $filext=(is_array($image))?pathinfo($image['name'])["extension"]:pathinfo($image)["extension"];
+           $filext=(is_array($image))?pathinfo($image['name'])["extension"]:pathinfo($image)["extension"];
                   
            if($this->allowed(strtolower($filext)))          
                $this->setimagevalue($image);
+           else
+               $this->addMessage ("extension", "image extension is not allowed");
            
     }
     
@@ -83,26 +106,40 @@ class Image{
     
     private function fill($info)
     {
+        
         foreach($info as $key=>$val)
         {
             if(in_array($key,$this->attributes))
             {
+                if($key=="filter"){
+                   
+                    $this->setfilter($val);                  
+                    
+                }else{
+                    $this->{$key}=$val;
+                }
                 
-                $this->{$key}=$val;
             }
         }
+    }
+    
+    
+    public function setfilter($val)
+    {
+        
+        foreach(explode(",",$val) as $key)
+        {
+            $this->filter[]=$key;
+        }
+        
+        return $this;
     }
     
     
     public static function open($image,$info=null)
     {    
         return new static($image,$info);
-    }
-    
-    private function getImageName()
-    {
-        return $this->imageName;
-    }
+    }    
     
     public function getImageExt()
     {
@@ -111,7 +148,7 @@ class Image{
     
      public function getThumbName()
      {
-         return $this->thumbName;
+         return $this->thumbName.".".$this->imageExt;
      }
      
      public function getThumbExt()
@@ -138,30 +175,28 @@ class Image{
     
      public function resize($width=null,$height=null,$dest=null)
      {      
-            
-            $this->thumbX=(!$width)?$this->thumbX:$width;
-            $this->thumbY=(!$height)?$this->thumbY:$height;
+            if($this->checkerror())return $this;
+            $this->thumbX=(is_null($width))?$this->thumbX:$width;
+            $this->thumbY=(is_null($height))?$this->thumbY:$height;
             $this->scale();
             $thumb=imagecreatetruecolor($this->thumbX,$this->thumbY);  
+            
             return $this->_resize($thumb,0,0,0,0,$this->thumbX,$this->thumbY,$this->imageX, $this->imageY,$dest);   
                 
      }
     
-    public function crop(){
+    public function crop()
+    {
         
     }
      private function _resize($thumb,$x,$y,$picture_x,$picture_y,$thumb_width=null,$thumb_height=null , $picture_width=null, $picture_height=null,$dest=null)
      {
             $img=$this->createimage();
             imagecopyresampled($thumb, $img, $x, $y,$picture_x,$picture_y,$thumb_width,$thumb_height , $picture_width, $picture_height);                    
-            $this->image=$thumb;
-            $this->save($dest);        
-
+            $this->image=$thumb;          
+            $this->save($dest);  
             $this->destroy($thumb,$img);
-           
-            return new self($this->path.$this->thumbName.".".$this->imageExt);       
-
-
+            return $this;              
      }
      
      
@@ -170,6 +205,29 @@ class Image{
          imagefilter($this->image, IMG_FILTER_GRAYSCALE);
          return $this;
      }
+     
+     public function blur()
+     {
+         imagefilter($this->image, IMG_FILTER_GAUSSIAN_BLUR);
+         return $this;
+     }
+     
+    public function sketch() 
+    {
+        imagefilter($this->image, IMG_FILTER_MEAN_REMOVAL);
+        return $this;
+
+    }
+
+
+
+ 
+     public function invert()
+     {
+            imagefilter($this->image, IMG_FILTER_NEGATE);
+            return $this;
+     }
+
  
      
      private function createimage()
@@ -200,8 +258,9 @@ class Image{
 
 
         $src_image=getimagesize($this->resource);
-         $this->path=(is_null($dest))?$this->path:$dest;
+        $this->path=(is_null($dest))?$this->path:$dest;
         $this->thumbName=(!$this->thumbName)?md5(time()."_".$this->imageName):$this->thumbName;
+        $this->checkfilter();
         switch ($src_image['mime'])
         {
             case 'image/jpeg';
@@ -216,6 +275,17 @@ class Image{
                 imagegif($this->image,$this->path.$this->thumbName.".".$this->imageExt,80);
             break;
         }
+    }
+    
+    public function checkfilter()
+    {
+          if(count($this->filter)>0)
+            {
+                foreach ($this->filter as $key)
+                {
+                    $this->{$key}();
+                }
+            }
     }
      
      public function destroy($image1,$image2)
