@@ -29,7 +29,7 @@ class Image{
         
         $this->getimageinfo($image);
         
-        if($this->passes())
+        if(!$this->checkerror())
         {           
             $this->createimage();
             if(!is_null($info))
@@ -41,7 +41,14 @@ class Image{
     
     public function passes()
     {
-        return !$this->checkerror();
+        return (!$this->checkerror() || $this->checkthumbfile())?true:false;        
+    }
+    
+    public function checkthumbfile()
+    {
+        $path=$this->getpath().$this->thumbName.".".$this->imageExt;
+        
+        return file_exists($path);
     }
     
     
@@ -53,6 +60,23 @@ class Image{
     public function imagepath()
     {
         $this->path=dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR."public/images/";
+    }
+    
+    public function addfoldertopath($name)
+    {
+        if(!is_dir($this->path.$name))  mkdir($this->path.$name);      
+        $this->path=$this->path.$name.DIRECTORY_SEPARATOR;     
+        return $this;
+    }
+    public function setpath($path)
+    {
+        $this->path=$path;
+        return $this;
+    }
+    
+    public function getpath()
+    {
+        return $this->path;
     }
     
     
