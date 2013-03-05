@@ -62,6 +62,10 @@ class Image{
         $this->path=dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR."public/images/";
     }
     
+    public static function  getuserpicdir()
+    {
+        return dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR."public/images/";
+    }
     public function addfoldertopath($name)
     {
         if(!is_dir($this->path.$name))  mkdir($this->path.$name);      

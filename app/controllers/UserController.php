@@ -59,16 +59,35 @@ class UserController extends BaseController {
        public function updatephoto($id)
        {
            $user=$this->user->find($id);      
-          
+            
+           
            if($user && (Input::hasFile("picture")))
            {
-               $result=Image::open($_FILES['picture'],["filter"=>"gray","thumbX"=>225,"thumbY"=>225])->crop(); 
+               $result=Image::open($_FILES['picture'],["thumbX"=>225,"thumbY"=>225]);
+               $result->addfoldertopath($user->username)->crop(); 
                
-               if($result->passes()){
-                   echo $result->getThumbName();die;
+               if($result->passes())
+               {
+                   
+                   $this->user->deletepicture($user->id);                  
+                   
+                   $user->picture=$result->getThumbName();
+                   
+                   if($user->save()){
+                      
+                       return Redirect::route("userpage",[$user->username]);
+                   }else{
+                       
+                       return Redirect::back()->with("error","something went wrong try again");
+                   }
+                 
+                   
+                   
                }
                else{
-                   var_dump($result->allMessage());die;
+                   
+                   return Redirect::back()->with("error","something went wrong try again");
+                   
                }
            }
            

@@ -21,7 +21,10 @@
    
    @endif
 </div>
-
+ <br/>
+  <?php  if($user->getuserimage($user->id)):?>
+    <img src="<?php echo path()."/images/".$user->username."/".$user->picture;?>">
+ <?php endif; ?>
 
 
 

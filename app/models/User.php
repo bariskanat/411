@@ -46,6 +46,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
           
            return true;
        }
+       
+       public function deletepicture($id)
+       {
+           $pic=$this->getuserimage($id);
+            if($pic) @unlink($pic);
+       }
+       
+       public function getuserimage($id)
+       {
+           
+           $user=User::find($id);
+           
+           if($user && is_null($user->picture)) return false;
+           
+           return Image::getuserpicdir().$user->username.DIRECTORY_SEPARATOR.$user->picture;
+       }
        public static function val($input=null,$rules=null)
        {
            if(is_null($rules)) $rules=self::$rules;
