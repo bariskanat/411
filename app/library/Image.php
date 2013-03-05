@@ -23,8 +23,10 @@ class Image{
     
     public function __construct($image,$info=null)
     {
-        $this->imagepath();       
+        $this->imagepath(); 
+        
         $this->resource=(is_array($image))?$image['tmp_name']:$image;
+        
         $this->getimageinfo($image);
         
         if($this->passes())
@@ -157,9 +159,9 @@ class Image{
      
      private  function scale()
      {
-        $thumb_ratio=$this->thumbX/$this->thumbY;      
+        $thumb_ratio=$this->thumbX/$this->thumbY;  
+        
         $ratio=$this->imageX/$this->imageY;
-
 
         if($thumb_ratio>$ratio)
         {
@@ -175,9 +177,12 @@ class Image{
      public function resize($width=null,$height=null,$dest=null)
      {      
             if($this->checkerror())return $this;
+            
             $this->setwidthandheight($width,$height);
+            
             $this->scale();
-            $thumb=imagecreatetruecolor($this->thumbX,$this->thumbY);  
+            
+            $thumb=imagecreatetruecolor($this->thumbX,$this->thumbY); 
             
             return $this->_resize($thumb,0,0,0,0,$this->thumbX,$this->thumbY,$this->imageX, $this->imageY,$dest);   
                 
@@ -186,43 +191,10 @@ class Image{
      private function setwidthandheight($width=null,$height=null)
      {
           $this->thumbX=(is_null($width))?$this->thumbX:$width;
+          
           $this->thumbY=(is_null($height))?$this->thumbY:$height;
      }
-    
-    public function crop($width=null,$height=null)
-    {
-        $this->setwidthandheight($width,$height);
-        $this->checkthumbsize();
-        if(!$this->checkthumbsize()) return $this;
-        
-        if($this->imageX>$this->imageY){
-            
-           $x=($this->imageX-$this->imageY)/2;
-           $y=0;
-        }elseif($this->imageX<$this->imageY){
-            $x=0;
-            $y=($this->imageX-$this->imageY)/2;
-            
-        }else{
-            
-            
-        }
-        
-        return $this->_resize($thumb,0,0,0,0,$this->thumbX,$this->thumbY,$this->imageX, $this->imageY,$dest);   
-    }
-    
-    
-    private function checkthumbsize()
-    {
-      if(($this->imageX-$this->thumbX < 0) || ($this->imageY-$this->thumbY < 0) ){
-        
-          $this->addMessage("thumb size", "the pivture is small");
-          return false;
-      }
-      
-      return true;
-         
-    }
+     
      private function _resize($thumb,$x,$y,$picture_x,$picture_y,$thumb_width=null,$thumb_height=null , $picture_width=null, $picture_height=null,$dest=null)
      {
             $img=$this->createimage();
@@ -232,8 +204,51 @@ class Image{
             $this->destroy($thumb,$img);
             return $this;              
      }
-     
-     
+    
+    public function crop($width=null,$height=null)
+    {
+        $this->setwidthandheight($width,$height);  
+        
+        if(!$this->checkthumbsize()) return $this;
+        
+        list($x,$y,$w)=$this->setcropsize();
+       
+        $thumb=imagecreatetruecolor($this->thumbX,$this->thumbY);
+        
+        return $this->_resize($thumb,0,0,$x,$y,$this->thumbX,$this->thumbY,$w,$w);   
+    }
+    
+    private function setcropsize()
+    {
+        if($this->imageX>$this->imageY){
+            
+           return [($this->imageX-$this->imageY)/2,0,$this->imageY];
+           
+        }elseif($this->imageX<$this->imageY){
+            
+            return[0,($this->imageX-$this->imageY)/2,$this->imageX];
+            
+        }else{  
+            
+            return [0,0,$this->imageX];
+        }        
+        
+    }
+    
+    
+    private function checkthumbsize()
+    {
+      if(($this->imageX-$this->thumbX < 0) || ($this->imageY-$this->thumbY < 0) )
+      {
+          $this->addMessage("thumb size", "the picture is small");
+          
+          return false;
+      }
+      
+      return true;
+         
+    }
+    
      public function gray()
      {
          imagefilter($this->image, IMG_FILTER_GRAYSCALE);

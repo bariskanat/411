@@ -62,9 +62,13 @@ class UserController extends BaseController {
           
            if($user && (Input::hasFile("picture")))
            {
-               $result=Image::open($_FILES['picture']); 
-               if($result){
-                   
+               $result=Image::open($_FILES['picture'],["filter"=>"gray","thumbX"=>225,"thumbY"=>225])->crop(); 
+               
+               if($result->passes()){
+                   echo $result->getThumbName();die;
+               }
+               else{
+                   var_dump($result->allMessage());die;
                }
            }
            
