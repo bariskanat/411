@@ -23,7 +23,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
        public static $rules=array(
             "username"              => "required|min:5|unique:users|max:70|alpha_dash",
             "email"                 => "required|email|unique:users",
-            "password"              => "required|min:6|confirmed"        
+            "password"              => "required|min:6|confirmed" ,
+            "firstname"              => "required|min:3|max:70|alpha",
+            "lastname"              => "required|min:2|max:70|alpha",
         
        );
        
@@ -32,6 +34,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
            if(!self::check_cred($username)) return false;            
                                      
            return true;           
+       }
+       
+       
+       public function fullname($id)
+       {
+           $user=User::find($id);
+           
+           return $user->firstname." ".$user->lastname;
        }
        
        private  static function check_cred($username)
