@@ -21,6 +21,26 @@
 </p>
 
 <p>
+    {{{Form::label("firstname","first name")}}}
+    {{{Form::text("firstname",Input::old("firstname"))}}}
+    
+    @if($errors->has("firstname"))
+        {{{$errors->first("firstname","<span class='errors'>:message</span>")}}}
+    @endif
+    
+</p>
+
+<p>
+    {{{Form::label("lastname","last name")}}}
+    {{{Form::text("lastname",Input::old("lastname"))}}}
+    
+    @if($errors->has("lastname"))
+        {{{$errors->first("lastname","<span class='errors'>:message</span>")}}}
+    @endif
+    
+</p>
+
+<p>
     {{{Form::label("email","email address")}}}
     {{{Form::text("email",Input::old("email"))}}}
     

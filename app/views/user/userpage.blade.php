@@ -3,28 +3,33 @@
 @section("header")
 
  {{{HTML::image("images/header.png")}}}
+ 
+ <h1>{{$user->fullname($user->id)}}</h1>
+ 
+ <?php  if($user->getuserimage($user->id)):?>
+    <img src="<?php echo path()."/images/".$user->username."/".$user->picture;?>" id="userimage">
+ <?php endif; ?>
+    
+ @if($perm)   
+    <ul class="userinfo">
+
+         
+
+        <li> {{{HTML::route('useredit', 'edit your profile', array('id' => $user->id))}}}</li>
+        <li>  {{{HTML::route('createpage', 'create a page ', array('id' => $user->id))}}}</li>
+        <li> {{{HTML::route('userphoto', 'update your photo ', array('id' => $user->id))}}}</li>
+
+
+    </ul>
+ @endif
 @stop
 
 @section("content")
 
-<?php
 
-  var_dump($perm);
-?>
-<div class="userinfo">
-    <h1>{{$user->username}}</h1>  
-   @if($perm)
 
-       {{{HTML::route('useredit', 'edit your profile', array('id' => $user->id))}}}
-       {{{HTML::route('createpage', 'create a page ', array('id' => $user->id))}}}
-       {{{HTML::route('userphoto', 'update your photo ', array('id' => $user->id))}}}
-   
-   @endif
-</div>
  <br/>
-  <?php  if($user->getuserimage($user->id)):?>
-    <img src="<?php echo path()."/images/".$user->username."/".$user->picture;?>">
- <?php endif; ?>
+  
 
 
 
