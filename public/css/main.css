@@ -52,14 +52,18 @@ body{
     
     
  background-color: rgb(249, 250, 247);
+ max-width: 100%;
+ overflow-x: hidden;
 }
 
 
 div#header{
     max-width: 100%;
-   
+    position: relative;
     background-size: 100% auto;
     background-repeat: no-repeat;
+  
+    
     
     
 }
@@ -67,6 +71,74 @@ div#header{
 div#header img{
    width: 1400px;
    height:320px;
+     border-bottom:  1px solid rgba(0, 0, 0, 0.9);
+
+    
+}
+
+div#header h1{
+    position: absolute;
+    top:150px;
+    right: 600px;
+    font-size: 50px;
+    text-transform: capitalize;
+   color:white;
+   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+   text-shadow: 2px 2px 2px black;
+   /*background-color: rgba(14, 98, 140, 0.35);*/
+   padding: 10px;
+}
+
+div#header ul.userinfo{
+    overflow: hidden;
+    position: absolute;
+    right:70px;
+    top: 20px;
+  
+}
+
+div#header ul.userinfo li{
+    float: left;
+}
+
+div#header ul.userinfo li a{
+    text-decoration: none;
+    text-transform: capitalize;
+    text-shadow: 2px 2px 2px black;
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-right: 2px;
+    line-height: 24px;
+    font-size: 24px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+div#header ul.userinfo li a:hover{
+    color: rgb(116, 193, 237);
+    text-shadow: none;
+    -webkit-transition: color .15s;
+    -moz-transition: color .15s;
+    -o-transition: color .15s;
+    transition: color .15s;
+    cursor: pointer;
+}
+
+
+
+div#header img#userimage{
+    width: 225px;
+    height:225px;
+    position: absolute;
+    bottom:-30px;
+    left:55px;
+    padding:5px;
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow:0 2px 4px rgba(0, 0, 0, 0.2);    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);    
+    background-color: white;
+    border-bottom:  1px solid rgba(0, 0, 0, 0.2);
+  
 }
 
   /*----------- main container --------------------*/ 
