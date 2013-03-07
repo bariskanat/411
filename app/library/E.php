@@ -4,6 +4,7 @@ class E{
     
     private static $td;
     private static $ivsize;
+    private static $key="b31a31da0c87e430fb4ad559ff021bf7bae7b4b5";
     
     
     private  static function initmcrypt()
@@ -35,7 +36,7 @@ class E{
         $iv=  substr($text,0,self::$ivsize);
         $text=substr($text,self::$ivsize);
         mcrypt_generic_init(self::$td, $key, $iv);
-        $encrypted_data = mdecrypt_generic(self::$td, $text);
+         $encrypted_data = mdecrypt_generic(self::$td, $text);
         self::closemcrypt();            
         return unserialize($encrypted_data);
     }

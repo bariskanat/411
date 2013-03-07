@@ -18,7 +18,7 @@ App::singleton("UserSession",function(){
 });
 
 Route::get('/',function(){
-    return "hello world";
+    
 });
 
 Route::get("register",array("as"=>"signup","uses"=>"UserController@create"));

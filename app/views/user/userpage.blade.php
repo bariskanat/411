@@ -10,7 +10,7 @@
     <img src="<?php echo path()."/images/".$user->username."/".$user->picture;?>" id="userimage">
  <?php endif; ?>
     
- @if($perm)   
+ @if($user->permission($user->username))   
     <ul class="userinfo">
 
          

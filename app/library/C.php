@@ -12,6 +12,7 @@ class C{
     
     private static $domain=null;
     
+       
    
    
     
@@ -91,7 +92,7 @@ class C{
     {
         if(!is_null($secret)) return H::create_hash ($secret);
         $key=  I::user_agent().I::ip();
-        return H::create_hash($key);
+        H::create_hash($key); 
     }
 
 
@@ -105,9 +106,7 @@ class C{
         $info=["key"=>$value,"secret"=> $this->secret()];
         $value=$this->encode($info);         
         setcookie($name, $value,time()+ self::$expire, self::$path, self::$domain, self::$secure, self::$httponly);
-        echo "<pre>";
-        print_r($_COOKIE);
-        echo "<hr/>";
+      
         
     }    
    
