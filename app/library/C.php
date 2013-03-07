@@ -12,11 +12,18 @@ class C{
     
     private static $domain=null;
     
+    private static $key;
+    
+    private $enc;
+    
        
    
    
     
     
+    public function __construct() {
+        $this->enc=new E();
+    }
    
     
     /**
@@ -39,19 +46,18 @@ class C{
     public  function get($name)
     {
         if(!$this->has($name))return false;
-        $secret=$this->decode($_COOKIE[$name])['secret'];
-      
+        $info=$this->decode($_COOKIE[$name]);
+         $secret=$info['secret'];
+       
         if($this->secret()!=$secret)
         {
-           
+            
             $this->delete($name);
             
         }
         else 
-        {
-            
-            
-            return $this->decode($_COOKIE[$name])['key'];
+        {  
+            return $info['key'];
         }
     }
     
@@ -88,11 +94,18 @@ class C{
     }
     
     
-    public function secret($secret=null)
+    public function secret()
     {
-        if(!is_null($secret)) return H::create_hash ($secret);
+        
+        if(isset(self::$key))return self::$key;        
         $key=  I::user_agent().I::ip();
-        H::create_hash($key); 
+        return self::$key = H::create_hash($key); 
+    }
+    
+    
+    public static function setsecret($secret)
+    {
+        self::$key=H::create_hash ($secret);
     }
 
 
@@ -118,7 +131,8 @@ class C{
      */
     public  function decode($value)
     {
-        return E::decode($value, md5($this->secret()));
+        
+        return $this->enc->decode($value, md5($this->secret()));
         
     }
     
@@ -130,7 +144,7 @@ class C{
      */
     public  function encode($input)
     {
-        return E::encode($input, md5($this->secret()));
+        return $this->enc->encode($input, md5($this->secret()));
         
     } 
     

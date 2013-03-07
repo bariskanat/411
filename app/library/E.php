@@ -2,24 +2,25 @@
 class E{
     
     
-    private static $td;
-    private static $ivsize;
-    private static $key="b31a31da0c87e430fb4ad559ff021bf7bae7b4b5";
+    private  $td;
+    private $ivsize;
     
     
-    private  static function initmcrypt()
-    {
-         self::$td = mcrypt_module_open('rijndael-256', '', 'cbc', '');
-         self::$ivsize=mcrypt_enc_get_iv_size(self::$td);
+    
+    public function __construct() {
+        $this->td=mcrypt_module_open('rijndael-256', '', MCRYPT_MODE_CBC, '');
+        $this->ivsize=mcrypt_enc_get_iv_size($this->td);
+                
     }
     
     
     
     
-    private static function closemcrypt()
+    
+    private  function closemcrypt()
     {
-         mcrypt_generic_deinit(self::$td);
-         mcrypt_module_close(self::$td);
+         mcrypt_generic_deinit($this->td);
+         mcrypt_module_close($this->td);
     }
     
     
@@ -27,17 +28,19 @@ class E{
      * 
      * @param type $value
      */
-    public static function decode($value,$key)
+    public  function decode($value,$key)
     {
         
         
-        $text=base64_decode($value);     
-        self::initmcrypt();
-        $iv=  substr($text,0,self::$ivsize);
-        $text=substr($text,self::$ivsize);
-        mcrypt_generic_init(self::$td, $key, $iv);
-         $encrypted_data = mdecrypt_generic(self::$td, $text);
-        self::closemcrypt();            
+        $text=base64_decode($value);    
+       
+        $iv=  substr($text,0,$this->ivsize);
+        $text=substr($text,$this->ivsize);
+        mcrypt_generic_init($this->td, $key, $iv);
+          $encrypted_data = mdecrypt_generic($this->td, $text);
+       
+        $this->closemcrypt();
+          
         return unserialize($encrypted_data);
     }
     
@@ -47,14 +50,14 @@ class E{
      * 
      * @param type $value
      */
-    public static function encode($input,$key)
+    public function encode($input,$key)
     {
         $input=  serialize($input); 
-        self::initmcrypt();      
-        $iv = mcrypt_create_iv(self::$ivsize, MCRYPT_RAND);
-        mcrypt_generic_init(self::$td, $key, $iv);
-        $encrypted_data = mcrypt_generic(self::$td, $input);
-        self::closemcrypt();        
+              
+        $iv = mcrypt_create_iv($this->ivsize, MCRYPT_RAND);
+        mcrypt_generic_init($this->td, $key, $iv);
+        $encrypted_data = mcrypt_generic($this->td, $input);
+        $this->closemcrypt();        
         return base64_encode($iv.$encrypted_data);
     }
     
