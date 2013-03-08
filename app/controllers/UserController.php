@@ -75,7 +75,7 @@ class UserController extends BaseController {
                    
                    if($user->save()){
                        if(Cache::get("user_{$user->username}"))
-                        Cache::forget("user_{$user->username}");
+                          Cache::forget("user_{$user->username}");
                        return Redirect::route("userpage",[$user->username]);
                    }else{
                        
