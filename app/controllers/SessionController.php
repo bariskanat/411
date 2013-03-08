@@ -27,7 +27,7 @@ class SessionController extends BaseController{
             
         }else
         {        
-            echo 4444;die;
+            
             return Redirect::back()->with("message","the password/username fields not match");
         }
     }
