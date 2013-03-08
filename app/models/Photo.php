@@ -1,7 +1,7 @@
 <?php
 
 
-class Photo{
+class Photo extends Base{
     
     protected $table="photos";
     
