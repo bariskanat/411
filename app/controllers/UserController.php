@@ -74,7 +74,8 @@ class UserController extends BaseController {
                    $user->picture=$result->getThumbName();
                    
                    if($user->save()){
-                      
+                       if(Cache::get("user_{$user->username}"))
+                        Cache::forget("user_{$user->username}");
                        return Redirect::route("userpage",[$user->username]);
                    }else{
                        
@@ -97,11 +98,19 @@ class UserController extends BaseController {
        }
          public function getUser($username)
          {
-
-             $user=$this->user->where("username",$username)->first();        
-             
-
-             return ($user)? View::make("user.userpage",array("user"=>$user)):Redirect::route("home");
+             if(!Cache::get("user_{$username}"))
+             {
+                 $user=$this->user->where("username",$username)->first();
+                 if($user)
+                 {
+                     Cache::put("user_{$username}",$user,60);
+                     return View::make("user.userpage",array("user"=>$user));
+                 }
+                 
+                 return Redirect::route("home");
+             }
+           
+             return ($user=Cache::get("user_{$username}"))? View::make("user.userpage",array("user"=>$user)):Redirect::route("home");
          }
          
          public function edit($id)
