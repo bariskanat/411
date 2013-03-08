@@ -27,15 +27,28 @@
 
 @section("content")
 
- 
-  <div class="registerarea" id="useredit">
+
+<div id="userinfoedit">
+<div id="usereditmenu">
+    <ul>
+        <li> {{{HTML::route('useredit', 'edit your profile', array('id' => $user->id))}}}</li>        
+        <li> {{{HTML::route('userphoto', 'update your photo ', array('id' => $user->id))}}}</li>
+    </ul>
+</div>
+
+  <div  id="useredit">  
     
-      <form enctype="multipart/form-data" method="POST" action="<?php echo $user->id; ?>">
+      <form enctype="multipart/form-data" method="POST" action="<?php echo $user->id; ?>" id="userphotoform">
     
-    {{{Form::file("picture")}}}
-    {{{Form::submit("upload your photo")}}}
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+        {{{Form::file("picture")}}}
+        <input type="submit" value="upload your photo" id="photosubmit">
+        <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
     {{{Form::close()}}}
-  </div>
+
+  
+  </div><!--------useredit-------------->
+</div><!----------userinfoedit--------->
+ 
+  
 @stop
 

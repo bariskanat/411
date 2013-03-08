@@ -218,9 +218,15 @@ div#useredit ul li{
     padding:5px;
 }
 
-div#useredit form#usereditform{
+div#useredit form#usereditform,div#useredit form#userphotoform{
     padding:10px;
 }
+
+#photosubmit{
+    margin-top: 10px;
+}
+
+
 
 div#useredit label{
     
