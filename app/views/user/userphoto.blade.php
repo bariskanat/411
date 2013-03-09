@@ -17,7 +17,7 @@
 
         <li> {{{HTML::route('useredit', 'edit your profile', array('id' => $user->id))}}}</li>
         <li>  {{{HTML::route('createpage', 'create a page ', array('id' => $user->id))}}}</li>
-        <li> {{{HTML::route('userphoto', 'update your photo ', array('id' => $user->id))}}}</li>
+      
 
 
     </ul>
