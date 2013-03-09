@@ -6,8 +6,11 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Album' => $baseDir . '/app/models/Album.php',
     'Base' => $baseDir . '/app/models/Base.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
+    'Comment' => $baseDir . '/app/models/Comment.php',
+    'CreateAlbumsTable' => $baseDir . '/app/database/migrations/2013_03_09_034549_create_albums_table.php',
     'CreatePagesTable' => $baseDir . '/app/database/migrations/2013_02_22_082534_create_pages_table.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2013_02_22_082417_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
@@ -333,6 +336,7 @@ return array(
     'Monolog\\Processor\\PsrLogMessageProcessor' => $baseDir . '/vendor/monolog/monolog/src/Monolog/Processor/PsrLogMessageProcessor.php',
     'Monolog\\Processor\\WebProcessor' => $baseDir . '/vendor/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
     'Page' => $baseDir . '/app/models/Page.php',
+    'PageController' => $baseDir . '/app/controllers/PageController.php',
     'Pheanstalk' => $baseDir . '/vendor/laravel/framework/src/Illuminate/Queue/Pheanstalk/Pheanstalk.php',
     'Pheanstalk_ClassLoader' => $baseDir . '/vendor/laravel/framework/src/Illuminate/Queue/Pheanstalk/Pheanstalk/ClassLoader.php',
     'Pheanstalk_Command' => $baseDir . '/vendor/laravel/framework/src/Illuminate/Queue/Pheanstalk/Pheanstalk/Command.php',
@@ -376,6 +380,7 @@ return array(
     'Pheanstalk_Socket_StreamFunctions' => $baseDir . '/vendor/laravel/framework/src/Illuminate/Queue/Pheanstalk/Pheanstalk/Socket/StreamFunctions.php',
     'Pheanstalk_Socket_WriteHistory' => $baseDir . '/vendor/laravel/framework/src/Illuminate/Queue/Pheanstalk/Pheanstalk/Socket/WriteHistory.php',
     'Pheanstalk_YamlResponseParser' => $baseDir . '/vendor/laravel/framework/src/Illuminate/Queue/Pheanstalk/Pheanstalk/YamlResponseParser.php',
+    'Photo' => $baseDir . '/app/models/Photo.php',
     'Psr\\Log\\AbstractLogger' => $baseDir . '/vendor/psr/log/Psr/Log/AbstractLogger.php',
     'Psr\\Log\\InvalidArgumentException' => $baseDir . '/vendor/psr/log/Psr/Log/InvalidArgumentException.php',
     'Psr\\Log\\LogLevel' => $baseDir . '/vendor/psr/log/Psr/Log/LogLevel.php',
@@ -384,6 +389,7 @@ return array(
     'Psr\\Log\\LoggerInterface' => $baseDir . '/vendor/psr/log/Psr/Log/LoggerInterface.php',
     'Psr\\Log\\LoggerTrait' => $baseDir . '/vendor/psr/log/Psr/Log/LoggerTrait.php',
     'Psr\\Log\\NullLogger' => $baseDir . '/vendor/psr/log/Psr/Log/NullLogger.php',
+    'SessionController' => $baseDir . '/app/controllers/SessionController.php',
     'SessionHandlerInterface' => $baseDir . '/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Symfony\\Component\\BrowserKit\\Client' => $baseDir . '/vendor/symfony/browser-kit/Symfony/Component/BrowserKit/Client.php',
     'Symfony\\Component\\BrowserKit\\Cookie' => $baseDir . '/vendor/symfony/browser-kit/Symfony/Component/BrowserKit/Cookie.php',
@@ -777,5 +783,7 @@ return array(
     'Symfony\\Component\\Translation\\Writer\\TranslationWriter' => $baseDir . '/vendor/symfony/translation/Symfony/Component/Translation/Writer/TranslationWriter.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
     'User' => $baseDir . '/app/models/User.php',
+    'UserAuthenticator' => $baseDir . '/app/models/UserAuthenticator.php',
     'UserController' => $baseDir . '/app/controllers/UserController.php',
+    'UserSession' => $baseDir . '/app/models/UserSession.php',
 );
