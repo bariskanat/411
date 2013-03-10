@@ -31,6 +31,7 @@
     <ul>
         <li> {{{HTML::route('useredit', 'edit your profile', array('id' => $user->id))}}}</li>        
         <li> {{{HTML::route('userphoto', 'update your photo ', array('id' => $user->id))}}}</li>
+        <li> {{{HTML::route('useralbum', 'update your photo ', array('id' => $user->id))}}}</li>
     </ul>
 </div>
 

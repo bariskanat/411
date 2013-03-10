@@ -29,6 +29,7 @@ Route::get("logout",array("before"=>"auth","as"=>"logout","uses"=>"SessionContro
 Route::get("create/{id}",array("as"=>"createpage","uses" => "PageController@getCreate"));
 Route::get("user/{id}",array("before"=>"auth","uses"=>"UserController@bbedit"));
 Route::get("photo/{id}",array("before"=>"auth","as"=>"userphoto","uses"=>"UserController@userphoto"));
+Route::get("album/{id}",array("before"=>"auth","as"=>"useralbum","uses"=>"AlbumController@getUserAlbum"));
 
 
 Route::put("user/{id}",array("before"=>"auth","uses"=>"UserController@bbupdate"));
@@ -41,6 +42,7 @@ Route::put("user/{id}",array("before"=>"auth","uses"=>"UserController@bbupdate")
 
 Route::post("register",array("before"=>"csrf","uses" => "UserController@store"));
 Route::post("photo/{id}",array("before"=>"auth","as"=>"editphoto","uses"=>"UserController@updatephoto"));
+Route::post("album/{id}",array("before"=>"auth","as"=>"createalbum","uses"=>"AlbumController@postUserAlbum"));
 Route::post("login",array("before"=>"guest","uses"=>"SessionController@postLogin"));
 Route::post("searchlogin","UserController@search");
 

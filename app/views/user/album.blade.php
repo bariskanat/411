@@ -26,8 +26,6 @@
 
 
 @section("content")
-
-
 <div id="userinfoedit">
 <div id="usereditmenu">
     <ul>
@@ -37,19 +35,10 @@
     </ul>
 </div>
 
-  <div  id="useredit">  
-    
-      <form enctype="multipart/form-data" method="POST" action="<?php echo $user->id; ?>" id="userphotoform">
-    
-        {{{Form::file("picture")}}}
-        <input type="submit" value="upload your photo" id="photosubmit">
-        <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    {{{Form::close()}}}
+  <div  id="useredit">
 
-  
+      <h1>baris kanat</h1>
   </div><!--------useredit-------------->
 </div><!----------userinfoedit--------->
- 
-  
 @stop
 
