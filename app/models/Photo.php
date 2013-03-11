@@ -7,7 +7,12 @@ class Photo extends Base{
     
     public function user()
     {
-        return $this->belongTo("User");
+        return $this->belongsTo("User");
+    }
+    
+    public function album()
+    {
+       return $this->belongsTo("Album");  
     }
     
     
