@@ -36,8 +36,31 @@
 </div>
 
   <div  id="useredit">
+      <ul>
+       <form enctype="multipart/form-data" method="POST" action="<?php echo $user->id; ?>" id="userphotoform">
+    
+        {{{Form::file("picture")}}}
+        <li>
+                <label for="albumname">Album name</label>
+                <input type="text"  name="albumname" id="albumname" value="<?php Input::old(); ?>">
+              </li>
 
-      <h1>baris kanat</h1>
+            <li>
+                <label for="location">location</label>
+                <input type="text" name="location" id="location">
+            </li>
+
+            <li>
+                <label for="about" class="textarealabel">about</label>
+                <textarea  id="about" name="about"></textarea>
+
+            </li>
+        <input type="submit" value="create an album" id="photosubmit">
+        </ul>
+        <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+    {{{Form::close()}}}
+
+      
   </div><!--------useredit-------------->
 </div><!----------userinfoedit--------->
 @stop

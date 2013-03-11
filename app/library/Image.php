@@ -124,6 +124,29 @@ class Image{
         return $this;
     }
     
+    public function getImageX()
+    {
+        return $this->imageX;
+    }
+    
+    public function getImageY()
+    {
+        return $this->imageX;
+    }
+    
+    public function getImageSize()
+    {
+        return $this->imagesize;
+    }
+    
+    
+    public function move($name=null)
+    {
+        $name=(!is_null($name))?$name:"b_".$this->thumbName;
+        
+        @move_uploaded_file($this->resource, $this->getpath().$name.".".$this->imageExt);
+    }
+    
     private function setattributes($info)
     {
         if(!is_array($info))return false;
@@ -328,6 +351,13 @@ class Image{
 
             return (!empty($this->image))?$this->image:false;
 
+     }
+     
+     public function setthumbName($name)
+     {
+         $this->thumbName=$name;
+         
+         return $this;
      }
      
     public function save($dest=null)
