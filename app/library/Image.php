@@ -143,8 +143,8 @@ class Image{
     public function move($name=null)
     {
         $name=(!is_null($name))?$name:"b_".$this->thumbName;
-        
-        @move_uploaded_file($this->resource, $this->getpath().$name.".".$this->imageExt);
+       
+        copy($this->resource, $this->getpath()."b_".$this->getThumbName());
     }
     
     private function setattributes($info)
@@ -203,6 +203,10 @@ class Image{
          return $this->thumbName.".".$this->imageExt;
      }
      
+     public function getThumb()
+     {
+         return $this->thumbName;
+     }
      public function getThumbExt()
      {
          return $this->thumbExt;
@@ -252,7 +256,7 @@ class Image{
             imagecopyresampled($thumb, $img, $x, $y,$picture_x,$picture_y,$thumb_width,$thumb_height , $picture_width, $picture_height);                    
             $this->image=$thumb;          
             $this->save($dest);  
-            $this->destroy($thumb,$img);
+           // $this->destroy($thumb,$img);
             return $this;              
      }
     

@@ -4,9 +4,14 @@ class AlbumController extends BaseController {
     
     protected $user;
     
-    public function __construct(User $user)
+    protected $album;
+
+
+    public function __construct(User $user,Album $album)
     {
         $this->user=$user;
+        
+        $this->album=$album;
         
        $this->beforeFilter('csrf', ['only' => ['postUserAlbum']]); 
     }
@@ -38,12 +43,18 @@ class AlbumController extends BaseController {
           
           if($result->passes())
           {
-              if($result->getImageX()<600 && $result->hetImageY()<600){
+              
+              if($result->getImageX()<600 && $result->getImageY()<600){
                   
                   $result->move();
               }else{
                   
-                  $result->resize(600,600);
+                  Image::open($_FILES['picture'])
+                          ->addfoldertopath($user->username)
+                          ->setthumbName("b_".$result->getThumb())
+                          ->resize(600,600);
+                
+              
               }
               
              $imagename=$result->getThumbName();
@@ -76,14 +87,30 @@ class AlbumController extends BaseController {
     }
     
     
-    public function getAllAlbumByUser()
+    public function getUserAlbumPhoto($id)
     {
+        if(!$this->checkperm($id)) return Redirect::route("home");
         
+        $album=$this->album->find($id);
+        
+        return View::make("album.useralbum",compact("album"));
     }
     
     public function deleteUserAlbum()
     {
         
+    }
+    
+    
+    public function checkperm($id)
+    {
+        $album=$this->album->find($id);
+        
+        $user= App::make("UserSession")->user();
+        
+        if(($album->id!=$user->id)|| ($album->email!=$user->email)|| ($album->username!=$user->username)) return false;
+        
+        return true;
     }
     
     public function updateUserAlbum(){}
