@@ -7,12 +7,12 @@ class Comment{
     
     public function user()
     {
-        return $this->belongTo("User");
+        return $this->belongsTo("User");
     }
     
     public function photo()
     {
-        return $this->belongTo("Photo");
+        return $this->belongsTo("Photo");
     }
     
     
