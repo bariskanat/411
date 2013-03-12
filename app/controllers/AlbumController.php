@@ -5,13 +5,17 @@ class AlbumController extends BaseController {
     protected $user;
     
     protected $album;
+    
+    protected $photo;
 
 
-    public function __construct(User $user,Album $album)
+    public function __construct(User $user,Album $album,Photo $photo)
     {
         $this->user=$user;
         
         $this->album=$album;
+        
+        $this->photo=$photo;
         
        $this->beforeFilter('csrf', ['only' => ['postUserAlbum']]); 
     }
@@ -59,7 +63,7 @@ class AlbumController extends BaseController {
               
              $imagename=$result->getThumbName();
              
-             $album= Album::create([
+             $album= $this->album->create([
                   "name"      => Input::get("albumname"),
                   "info"      => Input::get("about"),
                   "location"  => Input::get("location"),
@@ -69,7 +73,7 @@ class AlbumController extends BaseController {
              
              if($album)
              {
-                 Photo::create([
+                 $this->photo->create([
                      "album_id"    =>  $album->id,
                      "user_id"     =>  $id,
                      "filename"    =>  $imagename,
@@ -89,11 +93,17 @@ class AlbumController extends BaseController {
     
     public function getUserAlbumPhoto($id)
     {
-        if(!$this->checkperm($id)) return Redirect::route("home");
+        if(!$this->checkperm($id)) return Redirect::to("/");
         
         $album=$this->album->find($id);
         
-        return View::make("album.useralbum",compact("album"));
+        $user=$album->user;
+        
+        $photo=$album->photos;
+        
+        $location=path().DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR.$user->username.DIRECTORY_SEPARATOR;
+        
+        return View::make("album.useralbum",compact("album","user","photo","location"));
     }
     
     public function deleteUserAlbum()
@@ -108,7 +118,9 @@ class AlbumController extends BaseController {
         
         $user= App::make("UserSession")->user();
         
-        if(($album->id!=$user->id)|| ($album->email!=$user->email)|| ($album->username!=$user->username)) return false;
+        $u=$album->user;
+       
+        if(($u->id!=$user->id)|| ($u->email!=$user->email)|| ($u->username!=$user->username)) return false;
         
         return true;
     }

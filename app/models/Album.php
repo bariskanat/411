@@ -15,6 +15,8 @@ class Album extends Base{
     {
         return $this->hasMany("Photo");
     }
+    
+   
 }
 /*
  * To change this template, choose Tools | Templates
