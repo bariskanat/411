@@ -26,7 +26,7 @@
 
 
 @section("content")
-<div id="userinfoedit">
+<div id="useralbum">
 <div id="usereditmenu">
     <ul>
         <li> {{{HTML::route('useredit', 'edit your profile', array('id' => $user->id))}}}</li>        
@@ -35,11 +35,11 @@
     </ul>
 </div>
 
-  <div  id="useredit">
+  <div  id="useralbumedit">
     
       
-         
-       <form enctype="multipart/form-data" method="POST" action="<?php echo $album->id; ?>" id="userphotoform">
+      <div id="albumform">
+         <form enctype="multipart/form-data" method="POST" action="<?php echo $album->id; ?>" id="userphotoform">
     
         {{{Form::file("picture")}}}          
         <input type="submit" value="add a photo" id="photosubmit">
@@ -47,13 +47,20 @@
         
         <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
          {{{Form::close()}}}
+         
+       </div>
       
       
+         <div id="useralbumpic">
             @foreach($photo as $p)
-                <img src="<?php echo $location.$p->filename;?>" >
+                <div>
+                    <img src="<?php echo $location.$p->filename;?>" >
+                </div>
             @endforeach
-      
+         </div>
   </div><!--------useredit-------------->
+  
+  
 </div><!----------userinfoedit--------->
 @stop
 

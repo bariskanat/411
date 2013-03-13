@@ -173,9 +173,9 @@ div.form{
     
 }
 
-div#userinfoedit{
+div#userinfoedit,div#useralbumedit{
     overflow: hidden;
-    margin-top: 20px;
+    
     padding-bottom: 5px;
 }
 
@@ -184,6 +184,15 @@ div#usereditmenu,div#useredit{
 /*   border: 1px solid rgb(156, 172, 188);
    border:1px solid #111;*/
 background: white;
+-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);;
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);;
+box-shadow:0 1px 3px rgba(0, 0, 0, 0.65);;
+}
+div#useralbum{
+    float:left;
+}
+div#albumform{
+ background: white;
 -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);;
 -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);;
 box-shadow:0 1px 3px rgba(0, 0, 0, 0.65);;
@@ -213,9 +222,12 @@ div#usereditmenu ul li a:hover{
     text-decoration: underline;
 }
 
-div#useredit{
+div#useredit,div#useralbumedit{
     width: 75%;
     padding-top: 6px;
+}
+div#useralbumedit{
+    padding-top: 0;
 }
 
 div#useredit ul li{
@@ -225,7 +237,32 @@ div#useredit ul li{
 div#useredit form#usereditform,div#useredit form#userphotoform{
     padding:10px;
 }
+div#useralbumpic{
+    margin:10px auto;
+    overflow: hidden;
+  
+    
+    
+}
 
+div#useralbumpic div{
+    float:left;
+    padding:4px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);;
+-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);;
+box-shadow:0 1px 3px rgba(0, 0, 0, 0.65);;
+background: white;
+margin-right:8px;
+margin-bottom: 9px;
+}
+
+div#useralbumpic div:nth-child(4n+0){
+    margin-right: 0;
+}
+
+div#useralbumpic div img{
+    width: 213px;
+}
 #photosubmit{
     margin-top: 10px;
 }
@@ -242,7 +279,11 @@ div#useredit label{
     color: rgb(31, 141, 214);
 }
 
-div#useredit input{
+div#albumform {
+    padding:5px;
+}
+
+div#useredit input,div#albumform input{
     
 width:510px;
 display:block;
@@ -262,7 +303,7 @@ border: 1px solid rgb(204, 204, 204);
 -moz-border-radius: 3px;
 border-radius: 3px;
 }
-div#useredit input:focus,div#useredit textarea:focus,div#useredit input:hover,div#useredit textarea:hover{
+div#useredit input:focus,div#useredit textarea:focus,div#useredit input:hover,div#useredit textarea:hover,div#albumform input:hover.div#albumform input:focus{
     border-color:  rgb(31, 141, 214);
     outline: 0;
 }
@@ -293,7 +334,7 @@ div.registerarea p{
 
 
 
- div#useredit input[type=submit] {
+ div#useredit input[type=submit] ,div#albumform input[type=submit]{
 color: white;
 text-shadow: 0 -1px rgb(17, 77, 151);
 border: 1px solid rgb(17, 77, 151);
