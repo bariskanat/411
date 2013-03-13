@@ -17,7 +17,7 @@ class AlbumController extends BaseController {
         
         $this->photo=$photo;
         
-       $this->beforeFilter('csrf', ['only' => ['postUserAlbum']]); 
+       $this->beforeFilter('csrf', ['only' => ['postUserAlbum','postUserAlbumPhoto']]); 
     }
     
     public function getUserAlbum($id)
@@ -104,6 +104,60 @@ class AlbumController extends BaseController {
         $location=path().DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR.$user->username.DIRECTORY_SEPARATOR;
         
         return View::make("album.useralbum",compact("album","user","photo","location"));
+    }
+    
+    public function postUserAlbumPhoto($id)
+    {
+        if(!$this->checkperm($id)) return Redirect::to("/");
+        
+         $album=$this->album->find($id);
+         
+         $user=$album->user;
+         
+         $rules=['picture'=> 'mimes:jpeg,jpg,gif,png'];   
+         
+         $v= Validator::make(Input::all(),$rules);
+         
+         if((Input::hasFile("picture")) && $v->passes())
+         {
+              $result=Image::open($_FILES['picture'],["thumbX"=>225,"thumbY"=>225]);
+          
+              $result->addfoldertopath($user->username)->crop(); 
+          
+          if($result->passes())
+          {
+              
+              if($result->getImageX()<600 && $result->getImageY()<600){
+                  
+                  $result->move();
+              }else{
+                  
+                  Image::open($_FILES['picture'])
+                          ->addfoldertopath($user->username)
+                          ->setthumbName("b_".$result->getThumb())
+                          ->resize(600,600);
+                
+              
+              }
+              
+             $imagename=$result->getThumbName();
+             
+                 $this->photo->create([
+                     "album_id"    =>  $album->id,
+                     "user_id"     =>  $user->id,
+                     "filename"    =>  $imagename,
+                     "type"        =>   1
+                 ]);
+             
+             
+             return ($album)?Redirect::route("photos",[$album->id]):Redirect::back()->with("error","something wen wron try again");
+          }
+          
+           return Redirect::back()->with("error","something wen wron try again");
+             
+         }
+         
+         return Redirect::back()->with("error","something wen wron try again");
     }
     
     public function deleteUserAlbum()

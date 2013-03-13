@@ -38,6 +38,17 @@
   <div  id="useredit">
     
       
+         
+       <form enctype="multipart/form-data" method="POST" action="<?php echo $album->id; ?>" id="userphotoform">
+    
+        {{{Form::file("picture")}}}          
+        <input type="submit" value="add a photo" id="photosubmit">
+      
+        
+        <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+         {{{Form::close()}}}
+      
+      
             @foreach($photo as $p)
                 <img src="<?php echo $location.$p->filename;?>" >
             @endforeach

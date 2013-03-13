@@ -45,5 +45,6 @@ Route::post("register",array("before"=>"csrf","uses" => "UserController@store"))
 Route::post("photo/{id}",array("before"=>"auth","as"=>"editphoto","uses"=>"UserController@updatephoto"));
 Route::post("album/{id}",array("before"=>"auth","as"=>"createalbum","uses"=>"AlbumController@postUserAlbum"));
 Route::post("login",array("before"=>"guest","uses"=>"SessionController@postLogin"));
+Route::post("photos/{id}",array("before"=>"auth","as"=>"uploadphotos","uses"=>"AlbumController@postUserAlbumPhoto"));
 Route::post("searchlogin","UserController@search");
 
