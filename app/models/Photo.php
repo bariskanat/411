@@ -16,6 +16,11 @@ class Photo extends Base{
     }
     
     
+    public function location($username)
+    {
+        return path().DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR.$username.DIRECTORY_SEPARATOR;
+    }
+    
 }
 
 

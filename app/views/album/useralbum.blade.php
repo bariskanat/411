@@ -54,7 +54,9 @@
          <div id="useralbumpic">
             @foreach($photo as $p)
                 <div>
-                    <img src="<?php echo $location.$p->filename;?>" >
+                    <a href="<?php  echo URL::to("p/{$p->id}")?>">
+                        <img src="<?php echo $location.$p->filename;?>" >
+                    </a>
                 </div>
             @endforeach
          </div>

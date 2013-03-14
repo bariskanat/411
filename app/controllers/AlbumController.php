@@ -99,9 +99,9 @@ class AlbumController extends BaseController {
         
         $user=$album->user;
         
-        $photo=$album->photos;
+        $photo=$album->photos;       
         
-        $location=path().DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR.$user->username.DIRECTORY_SEPARATOR;
+        $location=$this->photo->location($user->username);
         
         return View::make("album.useralbum",compact("album","user","photo","location"));
     }
