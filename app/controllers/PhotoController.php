@@ -28,16 +28,27 @@ class PhotoController extends BaseController
         
         $user=$photo->user;
         
+        $otherphoto=$this->getThisAlbumPhoto($photo->album->id,$id);
+        
         $location=$this->photo->location($user->username);
         
         //$cperm=$this->getcommentperm($id);
         
         //$lperm=$this->getlikeperm($id);
         
-        return View::make("photo.index",compact("photo","location","user"));
+        return View::make("photo.index",compact("photo","location","user","otherphoto"));
         
         
         
+    }
+    
+    public function getThisAlbumPhoto($albumid,$id)
+    {
+        return $this->photo->where("album_id",$albumid)
+                           ->whereNotIn('id', array($id))
+                           ->orderBy('id', 'desc')
+                           ->take(20)
+                           ->get();
     }
     
     

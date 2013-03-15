@@ -401,17 +401,15 @@ div#mainphoto{
 }
 
 div#photosection{
- border-radius: 3px 3px 3px 3px;
--moz-border-radius: 3px 3px 3px 3px;
--webkit-border-radius: 3px 3px 3px 3px;
-box-shadow: inset 0 -1px rgba(0, 0, 0, 0.12);
--moz-box-shadow: inset 0 -1px rgba(0,0,0,0.12);
--webkit-box-shadow: inset 0 -1px rgba(0, 0, 0, 0.12);
-background: white;
+background-color: white;
+box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+-moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+
 padding: 5px;
 padding-left: 10px;
 width: 615px;
-margin-right: 10px;
+margin: 10px;
 }
 
 div#uinfo{
@@ -420,9 +418,9 @@ div#uinfo{
 }
 div#uinfo img{
     width: 40px;
-    -moz-border-radius: 4px;
+/*    -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    border-radius: 4px;
+    border-radius: 4px;*/
     float: left;
     margin-right: 5px;
     
@@ -432,16 +430,35 @@ div#uinfo span{
     float: left;
 }
 
-div#uinfo span a{
+div#uinfo span a,span.albumlink a{
     text-decoration: none;
     text-transform: capitalize;
     font-size: 13px;
     color:rgb(33, 153, 244);
     font-family: 'Open Sans', sans-serif;
 }
+span.albumlink{
+    display: inline-block;
+    margin-bottom: 5px;
+}
+span.albumlink a{
+    color: rgb(34, 25, 25);
+    font-weight: bold;
+    
+}
 
-div#uinfo span a:hover{
+div#uinfo span a:hover,span.albumlink a:hover{
     cursor: pointer;
     text-decoration: underline;
+}
+
+div#albumimage{
+    overflow:hidden;
+}
+div#albumimage img{
+    width: 49px;
+    float: left;
+    margin-right:  1px;
+    margin-bottom: 5px;
 }
 
