@@ -39,13 +39,13 @@
 
 
     {{{HTML::style("css/main.css")}}}
-    {{{HTML::script("js/jquery.js")}}}
-    {{{HTML::script("js/underscore.js")}}}
-    {{{HTML::script("js/backbone.js")}}}
+    {{{HTML::script("js/lib/jquery.js")}}}
+    {{{HTML::script("js/lib/underscore.js")}}}
+    {{{HTML::script("js/lib/backbone.js")}}}
     {{{HTML::script("js/main.js")}}}
-    {{{HTML::script("js/models.js")}}}
-    {{{HTML::script("js/collections.js")}}}
-    {{{HTML::script("js/views.js")}}}
+    {{{HTML::script("js/models/models.js")}}}
+    {{{HTML::script("js/collections/collections.js")}}}
+    {{{HTML::script("js/views/views.js")}}}
     {{{HTML::script("js/bb.js")}}}
     
   </body>
