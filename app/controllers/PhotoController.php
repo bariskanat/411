@@ -32,22 +32,68 @@ class PhotoController extends BaseController
         
         $location=$this->photo->location($user->username);
         
-        //$cperm=$this->getcommentperm($id);
+        $albums=$this->getOtherAlbum($user->id,$photo->album->id);
         
-        //$lperm=$this->getlikeperm($id);
-        
-        return View::make("photo.index",compact("photo","location","user","otherphoto"));
-        
-        
+        return View::make("photo.index",compact("photo","location","user","otherphoto","albums"));
         
     }
+    
+    private function getOtherAlbum($userid,$albumid)
+    {
+       
+         $query  = AllQuery::getuseralbum();
+         $result = DB::select($query,[$userid,$albumid]);
+         $query1 = AllQuery::getalbumphotos($result);
+               
+         $arr=$this->getalbumid($result);
+         array_unshift($arr,$userid);        
+        
+         $result2=DB::select($query1, array_values($arr));
+         
+        
+         return $this->getnewarry($result,$result2);
+
+    }
+    
+    private function getnewarry($result,$result2)
+    {
+        $newarr=[];
+        
+        foreach((array)$result as $r)
+        {
+           $newarr[$r->id]=["id"=>$r->id,"name"=>$r->name];
+           foreach($result2 as $v)
+           {
+               if(array_key_exists($v->id, $newarr))
+               {
+                   $newarr[$v->id]['file']=$v->file;
+               }
+           }
+        }
+        
+        return $newarr;
+    }
+    
+    private function getalbumid($result){
+        
+        $arr=[];
+        foreach($result as $t)
+        {
+            $arr[]=$t->id;
+        }
+        return $arr;
+        
+    }
+    
+    
+   
     
     public function getThisAlbumPhoto($albumid,$id)
     {
         return $this->photo->where("album_id",$albumid)
                            ->whereNotIn('id', array($id))
                            ->orderBy('id', 'desc')
-                           ->take(20)
+                           ->take(7)
                            ->get();
     }
     
