@@ -14,6 +14,15 @@ class AllQuery
                   
     }
     
+    public static function getuserallalbums()
+    {
+        return "SELECT `albums`.`id`,`albums`.`name` 
+                FROM `albums`                 
+                WHERE `albums`.`user_id` = ?                
+                ORDER BY `albums`.`id` DESC
+               ";  
+    }
+    
     public static function getalbumphotos($result)
     {
         return   "SELECT group_concat(`photos`.`filename`) as `file` ,`albums`.`id`                 

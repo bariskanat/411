@@ -30,6 +30,7 @@ Route::get("create/{id}",array("as"=>"createpage","uses" => "PageController@getC
 Route::get("user/{id}",array("before"=>"auth","uses"=>"UserController@bbedit"));
 Route::get("photo/{id}",array("before"=>"auth","as"=>"userphoto","uses"=>"UserController@userphoto"));
 Route::get("album/{id}",array("before"=>"auth","as"=>"useralbum","uses"=>"AlbumController@getUserAlbum"));
+Route::get("a/{username}",array("as"=>"useralbums","uses"=>"AlbumController@UserAlbums"));
 Route::get("photos/{id}",array("before"=>"auth","as"=>"photos","uses"=>"AlbumController@getUserAlbumPhoto"));
 Route::get("p/{id}",array("uses"=>"PhotoController@getPhoto"));
 

@@ -20,6 +20,61 @@ class AlbumController extends BaseController {
        $this->beforeFilter('csrf', ['only' => ['postUserAlbum','postUserAlbumPhoto']]); 
     }
     
+    public function UserAlbums($username)
+    {
+        $user=$this->user->where("username",$username)->first();
+        
+        if(!$user)  return Redirect::to("/");
+        
+        $userid=$user->id;
+        
+        $query  = AllQuery::getuserallalbums();
+        
+        $result = DB::select($query,[$userid]);
+        
+        $query1 = AllQuery::getalbumphotos($result);
+               
+         $arr=$this->getalbumid($result);
+         
+         array_unshift($arr,$userid);        
+        
+         $result2=DB::select($query1, array_values($arr));
+         
+         $albums=$this->getnewarry($result,$result2);
+         $location=$this->photo->location($user->username);
+         return View::make("album.all",compact("albums","location","user"));
+    }
+    
+    private function getnewarry($result,$result2)
+    {
+        $newarr=[];
+        
+        foreach((array)$result as $r)
+        {
+           $newarr[$r->id]=["id"=>$r->id,"name"=>$r->name];
+           foreach($result2 as $v)
+           {
+               if(array_key_exists($v->id, $newarr))
+               {
+                   $newarr[$v->id]['file']=$v->file;
+               }
+           }
+        }
+        
+        return $newarr;
+    }
+    
+    private function getalbumid($result){
+        
+        $arr=[];
+        foreach($result as $t)
+        {
+            $arr[]=$t->id;
+        }
+        return $arr;
+        
+    }
+    
     public function getUserAlbum($id)
     {
         

@@ -24,9 +24,9 @@
          <div id="bigimage">
              
            
-             
-            <img src="<?php echo $location."b_".$photo->filename ;?>">
-            
+             <div class="mainimage" >
+                <img src="<?php echo $location."b_".$photo->filename ;?>">
+             </div>
             
               <?php if(count($otherphoto)>0): ?>
             
