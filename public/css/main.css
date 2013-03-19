@@ -576,3 +576,37 @@ div#allalbums div.albumphotos img{
  width: 117px;
 }
 
+
+/*user album photos section*/ 
+
+div#useralbumphotos{
+    overflow: hidden;
+}
+div#useralbumphotos div{
+    float:left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    width: 225px;
+     box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    -moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+    -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    background-color: white;
+  
+    
+}
+div#useralbumphotos div:hover{
+    
+    
+    cursor: pointer;
+   
+ 
+}
+
+div#useralbumphotos a{
+    display: block;
+}
+
+div#useralbumphotos div img{
+    width: 225px;
+}

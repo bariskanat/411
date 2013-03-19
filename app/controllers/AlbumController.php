@@ -42,7 +42,25 @@ class AlbumController extends BaseController {
          
          $albums=$this->getnewarry($result,$result2);
          $location=$this->photo->location($user->username);
+         
+         
          return View::make("album.all",compact("albums","location","user"));
+    }
+    
+    public function UserAlbumphotos($id)
+    {
+        
+        $album=$this->album->find($id);
+        
+        if(!$album)  return Redirect::to("/");
+        
+        $photos=$album->photos;
+       
+        $user=$album->user;
+        
+        $location=$this->photo->location($user->username);
+        
+        return View::make("album.userphotos",compact("photos","album","location","user"));
     }
     
     private function getnewarry($result,$result2)
