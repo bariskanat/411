@@ -31,7 +31,7 @@
               <?php if(count($otherphoto)>0): ?>
             
                 <div id="albumimage">
-                    <span class="albumlink">{{{HTML::route('userpage', $photo->album->name, array('user' => $user->username))}}}</span><br/>
+                    <span class="albumlink">{{{HTML::route('albumuser', $photo->album->name, array('id' => $photo->album->id))}}}</span><br/>
                     <?php foreach($otherphoto as $ph): ?>
                         <a href="<?php  echo URL::to("p/{$ph->id}")?>" class="albumlink">
                             <img src="<?php echo $location.$ph->filename  ?>">
@@ -47,7 +47,7 @@
     <div id="otheralbums">
         
        <?php if (count($albums)>0): ?>
-      
+    
          <?php  foreach($albums as $album): ?>
                 <div class="ialbums">
                     <h1><?php echo $album['name']; ?></h1>
@@ -55,7 +55,7 @@
                    
                     
                         <?php  if(count($files)>0):?>
-                    
+                          <a href="<?php  echo URL::to("al/{$album['id']}")?>" class="useralbum">
                             <div class="albumphotos">
                                 <?php for($x=0;$x<=5;$x++){?>
                                     <div>
@@ -65,7 +65,7 @@
                                     </div>
                                 <?php  } ?>
                             </div>
-                    
+                          </a>
                         <?php endif; ?>
                     </div>
          <?php endforeach; ?>
