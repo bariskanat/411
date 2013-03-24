@@ -1,18 +1,26 @@
-App.Views.Likes=Backbone.View.extend({
+
+App.Views.PhotoLikes=Backbone.View.extend({
  
     initialize:function(){
+       this.render();
        
     },
         
     render:function(){
-       this.$el.html(this.template(this.model.toJSON()));
-       return this;
+       this.collection.fetch();    
+       console.log(this.collection.toJSON());
+       //this.$el.html(this.template(this.model.toJSON()));
+      //return this;
       
-    },
-    
-   template:_.template($("#useredittemplate").html())
+    }
+   
+   
     
 });
+
+
+
+
 
 
 

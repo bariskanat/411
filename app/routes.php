@@ -33,6 +33,8 @@ Route::get("album/{id}",array("before"=>"auth","as"=>"useralbum","uses"=>"AlbumC
 Route::get("a/{username}",array("as"=>"useralbums","uses"=>"AlbumController@UserAlbums"));
 Route::get("al/{id}",array("as"=>"albumuser","uses"=>"AlbumController@UserAlbumphotos"));
 
+Route::get("likes/{id?}",array("as"=>"likes","uses"=>"LikesController@index"));
+
 Route::get("photos/{id}",array("before"=>"auth","as"=>"photos","uses"=>"AlbumController@getUserAlbumPhoto"));
 Route::get("p/{id}",array("uses"=>"PhotoController@getPhoto"));
 

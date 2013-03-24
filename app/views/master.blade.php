@@ -44,9 +44,18 @@
     {{{HTML::script("js/lib/backbone.js")}}}
     {{{HTML::script("js/main.js")}}}
     {{{HTML::script("js/models/models.js")}}}
+    {{{HTML::script("js/models/likemodel.js")}}}
     {{{HTML::script("js/collections/collections.js")}}}
+    {{{HTML::script("js/collections/Likescollection.js")}}}
     {{{HTML::script("js/views/views.js")}}}
+    {{{HTML::script("js/views/likesview.js")}}}
     {{{HTML::script("js/bb.js")}}}
+    
+    <div class="footer">
+
+       @yield('footer')
+
+    </div> <!-- /footer -->
     
   </body>
 </html>

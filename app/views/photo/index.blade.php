@@ -75,4 +75,20 @@
     </div> <!-------- otheralbums ----------->
 
 </div> <!------  mainphoto ---------->
+
+@stop
+
+@section("footer")
+<script>
+
+$(function(){
+    
+    var b=new App.Collections.PhotoLikes([],{id:<?php echo $photo->id; ?>});
+    var view=new App.Views.PhotoLikes({collection:b});
+  
+    
+});
+
+</script>
+
 @stop

@@ -1,7 +1,11 @@
 
 
-App.Models.Likes=Backbone.Model.extend({
+App.Models.PhotoLikes=Backbone.Model.extend({
     
+    
+    defaults:{
+        "name":""
+    }
    
     
 });

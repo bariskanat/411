@@ -1,19 +1,16 @@
 <?php
 
 
-class Feed extends Base{
+class Like extends Base{
     
-    protected $user;
-    
-    public function __construct(User $user)
-    {
-        $this->user=$user;
-    }
     
     public function index($id)
     {
         
     }
+    
+    
+   
     
     
     public function add($id){

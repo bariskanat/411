@@ -1,5 +1,5 @@
 
-App=App ||  {};
+App = App ||  {};
 
 App.photos=function(options)
 {
@@ -7,7 +7,7 @@ App.photos=function(options)
     
 };
 
-App.photos.prototype={
+App.photos.prototype = {
   
     constructor:App.photos,
             

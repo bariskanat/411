@@ -29,15 +29,16 @@
 @section("content")
 <div id="allalbums">
    <?php if (count($albums)>0): ?>
-      
+    
          <?php  foreach($albums as $album): ?>
+    
                 <div class="ialbumss">
                     <h1><?php echo $album['name']; ?></h1>
                     <?php $files=explode(",",$album['file']); ?>
                    
                     
                         <?php  if(count($files)>0):?>
-                    
+                            <a href="<?php  echo URL::to("al/{$album['id']}")?>">
                             <div class="albumphotos">
                                 <?php for($x=0;$x<=5;$x++){?>
                                     <div>
@@ -47,7 +48,7 @@
                                     </div>
                                 <?php  } ?>
                             </div>
-                    
+                            </a>
                         <?php endif; ?>
                     </div>
          <?php endforeach; ?>
