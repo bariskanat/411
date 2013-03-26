@@ -33,6 +33,16 @@ class AllQuery
                   GROUP BY `albums`.`id`";
     }
     
+    public static function getphotolikes()
+    {
+        return "SELECT `likes`.`id`,`likes`.`content_id` ,`likes`.`external_id` as `userid`,`users`.`username`,`users`.`firstname`,`users`.`lastname`, `users`.`picture`
+                FROM `likes`
+                INNER JOIN `users` ON (`likes`.`external_id`=`users`.`id`)
+                WHERE `likes`.`content_id` = ? and `likes`.`type` = 1 
+                ORDER BY `likes`.`id` desc
+                LIMIT 20";
+    }
+    
     
     private static function builquestionmark($result)
     {
