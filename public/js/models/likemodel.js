@@ -3,8 +3,16 @@
 App.Models.PhotoLikes=Backbone.Model.extend({
     
     
-    defaults:{
-        "name":""
+    defaults:{ 
+        
+                "userid"      :"",
+                "id"          :"",
+                "content_id"  :"",                
+                "username"   :"",
+                "firstname"  :"",
+                "lastname"    :"",
+                "picture"     :"",
+                "userlike"    :""
     }
    
     

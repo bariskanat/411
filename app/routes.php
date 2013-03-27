@@ -41,6 +41,7 @@ Route::get("p/{id}",array("uses"=>"PhotoController@getPhoto"));
 
 Route::put("user/{id}",array("before"=>"auth","uses"=>"UserController@bbupdate"));
 
+Route::delete("likes/{id?}/{likeid}",array("as"=>"deletelike","uses"=>"LikesController@deletelike"));
 
 
 

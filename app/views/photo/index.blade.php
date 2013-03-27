@@ -12,7 +12,7 @@
 
 <div id="mainphoto">
     <div id="photosection">
-        
+      <div class="mainphotosection"> 
         <div id="uinfo">
             
             <img src="<?php echo $location.$user->picture; ?>">
@@ -42,6 +42,20 @@
             
             
         </div><!------- bigimage -------->
+        
+        
+    </div><!---------mainphotosection-------->
+    
+    
+        <div id="userphotolikes">
+            
+            <div id="userlikemain">
+                
+            </div>
+
+        </div><!------------userphotolikes----------->
+   
+    
     </div> <!-----  photosection ------->
     
     <div id="otheralbums">
@@ -76,6 +90,14 @@
 
 </div> <!------  mainphoto ---------->
 
+<script id="likestemplate" type="text/template">
+    <a href="../u/<%= username  %>">
+        <img src="<%= picture %>">
+    </a>
+<span><%= firstname %> <%= lastname %></span>
+
+</script>
+
 @stop
 
 @section("footer")
@@ -84,9 +106,14 @@
 $(function(){
     
     var b=new App.Collections.PhotoLikes([],{id:<?php echo $photo->id; ?>});
-    var view=new App.Views.PhotoLikes({collection:b});
-  
     
+    b.fetch().then(function(){
+        var c=new App.Views.PhotoLikes({collection:b,userid:"<?php echo $authuser; ?>"});     
+        
+    });
+
+ 
+ 
 });
 
 </script>

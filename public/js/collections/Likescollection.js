@@ -1,4 +1,4 @@
-
+var App=App || {};
 
 App.Collections.PhotoLikes=Backbone.Collection.extend({
     
@@ -12,6 +12,15 @@ App.Collections.PhotoLikes=Backbone.Collection.extend({
     {
       return "../likes/"+this.photoId;
     },
+        
+     youlike:function()
+     {        
+       return this.filter(function(like){
+           return like.get("userlike");
+       }).length;
+   
+     
+     },
         
     model:App.Models.PhotoLikes
     

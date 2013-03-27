@@ -11,13 +11,13 @@ class PhotoController extends BaseController
     
     protected  $photo;
     
-    public function __construct(User $user,Album $album,Photo $photo)
+    public function __construct()
     {
-        $this->user=$user;
+        $this->user=new User();
         
-        $this->album=$album;
+        $this->album=new Album();
         
-        $this->photo=$photo;
+        $this->photo=new Photo();
     }
     
     public function getPhoto($id)
@@ -27,6 +27,11 @@ class PhotoController extends BaseController
         if(!$photo) return Redirect::to("/");
         
         $user=$photo->user;
+        $authuser=null;
+        if(($c=App::make("UserSession")->user())){
+             $authuser=$c->id;
+        }
+       
         
         $otherphoto=$this->getThisAlbumPhoto($photo->album->id,$id);
         
@@ -34,7 +39,7 @@ class PhotoController extends BaseController
         
         $albums=$this->getOtherAlbum($user->id,$photo->album->id);
         
-        return View::make("photo.index",compact("photo","location","user","otherphoto","albums"));
+        return View::make("photo.index",compact("photo","location","user","otherphoto","albums","authuser"));
         
     }
     

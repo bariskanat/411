@@ -19,9 +19,14 @@ class LikesController extends BaseController
      
         $query=AllQuery::getphotolikes();
         
-        $result=DB::select($query,[$id]);       
+        $result=DB::select($query,[$id]); 
         
-        $userid=App::make("UserSession")->user()->id;
+        if(count($result)<1)return json_encode([]);
+        $userid=null;
+        if(($user=App::make("UserSession")->user())){
+            $userid=$user->id;
+        }
+        
         
         $newarr=[];
         
@@ -47,9 +52,20 @@ class LikesController extends BaseController
     
     
     
-    public function delete($id)
+    public function deletelike($photoid,$likeid)
     {
+        $result=$this->likes->where(function($where) use ($photoid,$likeid){
+            $where->where("content_type",1)
+                  ->where("type",1)
+                  ->where("id",$likeid)
+                  ->where("content_id",$photoid);
+            
+        });
         
+        if($result)
+        {
+            $result->delete();
+        }
     }
     
     public function add($id)

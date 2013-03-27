@@ -402,16 +402,33 @@ div#mainphoto{
 }
 
 div#photosection{
-background-color: white;
-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
--moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
--webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+
 float: left;
 padding: 5px;
 padding-left: 10px;
 width: 615px;
 margin:3px;
 
+}
+
+div.mainphotosection,div#userphotolikes{
+background-color: white;
+box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+-moz-box-shadow: 0 1px 2px rgba(34,25,25,0.4);
+-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+div#userphotolikes{
+    margin-top:10px;
+    
+}
+
+div#userphotolikes img{
+    width: 30px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    padding:2px;
 }
 div#bigimage{
     max-width: 615px;
@@ -626,4 +643,29 @@ div#useralbumphotos a{
 
 div#useralbumphotos div img{
     width: 225px;
+}
+
+
+
+div#userlikemain {
+    overflow: hidden;
+}
+
+div#userlikemain div {
+    float: left;
+    padding-right: 2px;
+    padding-bottom: 2px;
+}
+
+a.userlikesec{
+    text-decoration: none;
+    padding:2px;
+    text-transform: capitalize;
+    font-size: 13px;
+    color: rgb(33, 153, 244);
+    font-family: 'Open Sans', sans-serif;
+}
+
+a.userlikesec:hover{
+    text-decoration: underline;
 }
