@@ -6,6 +6,17 @@ App.Views.likeview=Backbone.View.extend({
     initialize:function()
     {
         this.model.on("destroy",this.remove,this);
+        
+    },
+       
+            
+    events:{
+      "mouseover a":"handlemouseover"
+    },
+        
+    handlemouseover:function()
+    {
+        console.log(this.$el);
     },
         
     remove:function()

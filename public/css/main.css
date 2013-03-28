@@ -655,8 +655,12 @@ div#userlikemain div {
     float: left;
     padding-right: 2px;
     padding-bottom: 2px;
+    position: relative;
 }
-
+div#userlikemain div span{
+    display:none;
+    position:absolute;
+}
 a.userlikesec{
     text-decoration: none;
     padding:2px;
